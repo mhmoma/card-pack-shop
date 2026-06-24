@@ -59,7 +59,7 @@ async function create(ctx: any, body: any) {
     const v = (await ctx.kv.global.get(DETAIL_PREFIX + code))?.value;
     if (v?.seller === lock) mine++;
   }
-  if (mine >= 5) throw new Error('每个玩家最多上架 5 张');
+  if (mine >= 4) throw new Error('每个玩家最多上架 4 个卡位');
   const cardCode = encCard(body.card);
   const code = `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
   const price = Number(body.card.price);

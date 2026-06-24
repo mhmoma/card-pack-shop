@@ -43,7 +43,7 @@ window.CardShop.ui = (() => {
     $('collectionFilters').innerHTML = filterGroup('region', collection.regions, filter.region)
       + filterGroup('generation', collection.generations, filter.generation)
       + filterGroup('quality', collection.qualities, filter.quality);
-    $('cardsGrid').innerHTML = page.length ? page.map(cardHtml).join('') : '<div class="empty">当前分类暂无卡片，换个地区或品质看看。</div>';
+    $('cardsGrid').innerHTML = page.length ? page.map(collectionCardHtml).join('') : '<div class="empty">当前分类暂无卡片，换个地区或品质看看。</div>';
     $('loadMoreCards').classList.toggle('hidden', page.length >= shown.length);
   }
 
@@ -86,6 +86,10 @@ window.CardShop.ui = (() => {
       <div class="pack-art"><img src="${img}" alt="${pack.name}"></div>
       <h3>${pack.name}</h3><p>${pack.cards} 张卡 · ${slot.hot ? '热门' : '常规'}</p>
       <strong>${price} 金币</strong></article>`;
+  }
+
+  function collectionCardHtml(card) {
+    return `<div class="collection-trade">${cardHtml(card)}<button data-list-card="${card.id}">上架交易</button></div>`;
   }
 
   function cardHtml(card) {
