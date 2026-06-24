@@ -30,6 +30,7 @@
   }
   function marketCardPrice(card) { return money(card.value * state.marketMood.rate); }
   async function save() { await saveSystem.save(state); }
+  window.CardShop.gameState = state; window.CardShop.saveGame = save;
   async function startGame(slot) {
     ui.showLoading(5, '准备进入卡槽...');
     const saved = await saveSystem.prepare(slot, ui.showLoading);
@@ -43,6 +44,7 @@
     ui.renderAll(state);
     ui.switchTab(state.tab || 'shop');
     ui.enterGame();
+    window.CardShop.afterGameStart?.();
     if (!window.CardShop.tickTimer) window.CardShop.tickTimer = setInterval(tick, 1000);
     await save();
   }

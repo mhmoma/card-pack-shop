@@ -57,7 +57,7 @@ window.CardShop.ui = (() => {
     $('marketText').textContent = `当前行情：${state.marketMood.name}，售价倍率 ${state.marketMood.rate}x`;
     const dupes = state.cards.filter((c, i, arr) => arr.findIndex((x) => x.pokemonId === c.pokemonId) !== i);
     $('marketList').innerHTML = dupes.length ? dupes.map((c) =>
-      `<div class="market-item">${cardHtml(c)}<button data-sell-card="${c.id}">出售 ${priceFns.card(c)} 金币</button></div>`
+      `<div class="market-item">${cardHtml(c)}<button data-sell-card="${c.id}">出售 ${priceFns.card(c)} 金币</button><button data-list-card="${c.id}">上架交易</button></div>`
     ).join('') : '<div class="empty">没有重复卡可出售。未开卡包可在“卡包”页出售。</div>';
   }
 
