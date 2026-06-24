@@ -23,6 +23,10 @@ function hashText(text: string) {
 }
 function sellerLock(ctx: any) { return hashText(`${ctx.gameId}:${ctx.user?.id || 'guest'}`); }
 function sellerTag(lock: string) { return `训练师#${lock.slice(-4).toUpperCase()}`; }
+function displayName(ctx: any, lock: string) {
+  const name = String(ctx.user?.name || '').trim().slice(0, 16);
+  return name || sellerTag(lock);
+}
 function encCard(card: any) {
   const id = Number(card?.pokemonId);
   const price = Number(card?.price);
@@ -46,7 +50,7 @@ async function list(ctx: any, body: any) {
   const items = [];
   for (const code of slice) {
     const v = (await ctx.kv.global.get(DETAIL_PREFIX + code))?.value;
-    if (v) items.push({ code, card: decCard(v.cardCode), price: v.price, sellerTag: sellerTag(v.seller), createdAt: v.createdAt });
+    if (v) items.push({ code, card: decCard(v.cardCode), price: v.price, sellerTag: v.sellerName || sellerTag(v.seller), createdAt: v.createdAt });
   }
   return { items, hasMore: all.length > (page + 1) * PAGE_SIZE };
 }
@@ -63,9 +67,10 @@ async function create(ctx: any, body: any) {
   const cardCode = encCard(body.card);
   const code = `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
   const price = Number(body.card.price);
-  await ctx.kv.global.put(DETAIL_PREFIX + code, { cardCode, price, seller: lock, createdAt: Date.now() });
+  const sellerName = displayName(ctx, lock);
+  await ctx.kv.global.put(DETAIL_PREFIX + code, { cardCode, price, seller: lock, sellerName, createdAt: Date.now() });
   await putCodes(ctx, [code, ...current]);
-  return { code, sellerTag: sellerTag(lock), card: decCard(cardCode), price };
+  return { code, sellerTag: sellerName, card: decCard(cardCode), price };
 }
 
 async function buy(ctx: any, body: any) {
