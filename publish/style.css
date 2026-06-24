@@ -177,7 +177,7 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
   padding-bottom: 8px;
 }
 .section-head p, .pack-card p { color: #d9bf8c; font-size: 13px; }
-.poke-card p { color: #d9bf8c; font-size: 12px; }
+.poke-card p { color: #f0dcaa; font-size: 10px; font-family: Arial, 'Microsoft YaHei', sans-serif; }
 .pack-card, .owned-pack, .market-item {
   border: 1px solid rgba(160, 116, 56, .65);
   background: linear-gradient(160deg, rgba(54, 32, 22, .88), rgba(17, 10, 16, .94));
@@ -188,8 +188,8 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
   position: relative;
   overflow: hidden;
   aspect-ratio: 2 / 3;
-  min-height: 168px;
-  padding: 7px;
+  min-height: 138px;
+  padding: 5px;
   border: 0;
   border-radius: 10px 10px 16px 16px;
   clip-path: polygon(8% 0, 92% 0, 100% 7%, 100% 93%, 91% 100%, 9% 100%, 0 93%, 0 7%);
@@ -200,14 +200,30 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 .pack-card.sold { filter: grayscale(.8); opacity: .55; }
 .pack-art { height: 110px; display: grid; place-items: center; }
 .pack-art img { max-height: 122px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 12px 12px rgba(0,0,0,.45)); }
-.pack-card h3, .poke-card h3 { font-size: 13px; color: #fff0be; }
-.pack-card strong, .poke-card strong { display: block; margin-top: 4px; color: #e9be52; font-size: 13px; }
+.pack-card h3 { font-size: 13px; color: #fff0be; }
+.poke-card h3 {
+  margin-top: 2px;
+  font-family: Arial, 'Microsoft YaHei', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.05;
+  color: #fff7cf;
+}
+.pack-card strong { display: block; margin-top: 4px; color: #e9be52; font-size: 13px; }
+.poke-card strong {
+  display: block;
+  margin-top: 2px;
+  color: #ffd45f;
+  font-family: Arial, 'Microsoft YaHei', sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+}
 .list-grid, .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 6px;
 }
-.cards-grid.compact { grid-template-columns: repeat(auto-fit, minmax(108px, 1fr)); }
+.cards-grid.compact { grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); }
 .card-bg {
   position: absolute;
   inset: 0;
@@ -221,12 +237,12 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 .pokemon-art {
   position: relative;
   z-index: 3;
-  width: 68%;
-  height: 42%;
-  margin-top: 22%;
+  width: 58%;
+  height: 36%;
+  margin-top: 25%;
   object-fit: contain;
   image-rendering: auto;
-  filter: drop-shadow(0 8px 7px rgba(0, 0, 0, .55));
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .55));
 }
 .poke-card h3, .poke-card p, .poke-card strong { position: relative; z-index: 3; text-shadow: 0 2px 4px #12070a; }
 .poke-card.common { box-shadow: 0 0 10px rgba(157, 139, 108, .22); }
@@ -244,21 +260,6 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
   pointer-events: none;
   animation: shine 2.2s linear infinite;
 }
-.tag {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  padding: 2px 5px;
-  border: 1px solid currentColor;
-  font-size: 11px;
-  background: rgba(0, 0, 0, .42);
-  color: #fff2b6;
-}
-.poke-card.common .tag { color: #d6c5a4; }
-.poke-card.uncommon .tag { color: #6cc5ff; }
-.poke-card.rare .tag { color: #bd9cff; }
-.poke-card.epic .tag { color: #ffd15f; }
-.poke-card.legendary .tag { color: #ff9df0; }
 .row { display: flex; gap: 8px; margin-top: 8px; }
 .row button { flex: 1; }
 .empty {
