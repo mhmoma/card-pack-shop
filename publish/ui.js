@@ -53,11 +53,9 @@ window.CardShop.ui = (() => {
   function shelfPack(slot, index) {
     const pack = config.packTypes[slot.type];
     const img = config.assets[pack.image];
-    const action = slot.sold ? '<span>已售罄</span>' : `<button data-buy="${slot.id}">购买</button>`;
-    return `<div class="shelf-item pos-${index} ${slot.sold ? 'sold' : ''}">
+    return `<div class="shelf-item pos-${index} ${slot.sold ? 'sold' : ''}" ${slot.sold ? '' : `data-buy="${slot.id}"`}>
       <img class="shelf-pack-img" src="${img}" alt="${pack.name}">
-      <div class="shelf-price"><b>${pack.name}</b><span>${slot.price} 金币</span></div>
-      <div class="shelf-action">${action}</div>
+      <div class="shelf-price"><b>${pack.name}</b><span>${slot.sold ? '已售罄' : `${slot.price} 金币`}</span></div>
     </div>`;
   }
 

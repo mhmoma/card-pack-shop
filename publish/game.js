@@ -122,14 +122,6 @@
     if (e.target.dataset.tab) ui.switchTab(e.target.dataset.tab);
   });
 
-  $('refreshBtn').addEventListener('click', async () => {
-    if (state.gold < config.manualRefreshCost) return toast('金币不足');
-    state.gold -= config.manualRefreshCost;
-    makeShop();
-    await save();
-    ui.renderAll(state);
-  });
-
   $('closeModal').addEventListener('click', () => $('modal').classList.add('hidden'));
   load();
 })();
