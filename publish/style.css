@@ -84,7 +84,7 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 .shelf-grid {
   position: absolute;
   left: 50%;
-  top: 56%;
+  top: 52%;
   width: min(69vw, calc(86vh * 1.55));
   transform: translate(-50%, -50%);
 }
@@ -119,14 +119,14 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
   object-fit: contain;
   filter: drop-shadow(0 8px 7px rgba(0, 0, 0, .62));
 }
-.pos-0 { left: 24%; top: 41.2%; }
-.pos-1 { left: 41.3%; top: 41.2%; }
-.pos-2 { left: 58.7%; top: 41.2%; }
-.pos-3 { left: 76%; top: 41.2%; }
-.pos-4 { left: 24%; top: 66.6%; }
-.pos-5 { left: 41.3%; top: 66.6%; }
-.pos-6 { left: 58.7%; top: 66.6%; }
-.pos-7 { left: 76%; top: 66.6%; }
+.pos-0 { left: 27%; top: 38.6%; }
+.pos-1 { left: 42.3%; top: 38.6%; }
+.pos-2 { left: 57.7%; top: 38.6%; }
+.pos-3 { left: 73%; top: 38.6%; }
+.pos-4 { left: 27%; top: 61.5%; }
+.pos-5 { left: 42.3%; top: 61.5%; }
+.pos-6 { left: 57.7%; top: 61.5%; }
+.pos-7 { left: 73%; top: 61.5%; }
 .shelf-price {
   position: absolute;
   left: -50%;
@@ -259,5 +259,5 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
   .scene-timer { top: 12%; }
 }
 @media (min-aspect-ratio: 16/9) {
-  .shelf-grid { width: min(66vw, calc(84vh * 1.55)); top: 56%; }
+  .shelf-grid { width: min(66vw, calc(84vh * 1.55)); top: 52%; }
 }
