@@ -47,21 +47,25 @@ window.CardShop.collection = (() => {
     const region = regions.find((item) => num >= item.min && num <= item.max);
     return region?.key || 'all';
   }
+  function dataTag(card, field) {
+    const data = window.CardShop.pokemonData.byId[card.pokemonId];
+    return data?.[field] || tagOf(card.pokemonId);
+  }
   function uniqueCount(cards) { return new Set(cards.map((card) => card.pokemonId)).size; }
   function tagPokemonData() {}
   function tagCard(card) {
-    const tag = tagOf(card.pokemonId);
-    card.regionTag = tag;
-    card.generationTag = tag;
+    card.regionTag = dataTag(card, 'regionTag');
+    card.generationTag = dataTag(card, 'generationTag');
     return card;
   }
   function tagCards(cards) { cards.forEach(tagCard); return cards; }
 
   function match(card, rawFilter) {
     const filter = normalizeFilter(rawFilter);
-    const tag = tagOf(card.pokemonId);
-    if (filter.region !== 'all' && tag !== filter.region) return false;
-    if (filter.generation !== 'all' && tag !== filter.generation) return false;
+    const regionTag = dataTag(card, 'regionTag');
+    const generationTag = dataTag(card, 'generationTag');
+    if (filter.region !== 'all' && regionTag !== filter.region) return false;
+    if (filter.generation !== 'all' && generationTag !== filter.generation) return false;
     if (filter.quality === 'shiny') return card.shiny;
     if (filter.quality !== 'all' && card.rarity.key !== filter.quality) return false;
     return true;
