@@ -42,7 +42,8 @@ window.CardShop.tradeMarket = (() => {
   function safeAttr(value) { return String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
   function shopHtml(name, items, key) {
     const top = cardFromMarket(items[0]);
-    return `<button class="trainer-shop" data-open-shop="${key}"><b>${name}</b><span>${items.length} 张上架</span><em>最低 ${Math.min(...items.map((x) => x.price))} 金币</em><small>${top.shiny ? '闪光 ' : ''}${safeAttr(top.name)}</small></button>`;
+    const minPrice = Math.min(...items.map((x) => x.price));
+    return `<button class="trainer-shop" data-open-shop="${key}"><i></i><b>${safeAttr(name)} 的卡牌铺</b><span>${items.length} 张上架 · 最低 ${minPrice} 金币</span><div><img src="${top.sprite}" alt=""><em>${top.shiny ? '闪光 ' : ''}${safeAttr(top.name)}</em></div><small>进入店铺</small></button>`;
   }
   function groupedShops() {
     const groups = Object.create(null);
