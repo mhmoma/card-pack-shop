@@ -75,8 +75,11 @@
     const base = config.packTypes[pack.type];
     ui.showModal('开包中...', '<div class="pack-opening"><div class="magic-ring"></div><div class="burst-card"></div><div class="sparkles"><i></i><i></i><i></i><i></i><i></i><i></i></div><p>封印正在解除，稀有卡牌即将显现...</p></div>');
     try {
+      const startedAt = Date.now();
       const cards = [];
       for (let i = 0; i < base.cards; i++) cards.push(await makeCard(pack.type));
+      const remain = 1800 - (Date.now() - startedAt);
+      if (remain > 0) await new Promise((resolve) => setTimeout(resolve, remain));
       state.cards.push(...cards);
       state.packs = state.packs.filter((x) => x.id !== id);
       await save();

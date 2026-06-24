@@ -277,11 +277,21 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 .close-btn { position: absolute; top: 10px; right: 10px; width: 44px; }
 .pack-opening {
   position: relative;
-  min-height: 260px;
+  min-height: 300px;
   display: grid;
   place-items: center;
   overflow: hidden;
   color: #ffe7a3;
+  background: radial-gradient(circle, rgba(120, 70, 185, .24), transparent 62%);
+}
+.pack-opening::before {
+  content: '';
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 241, 145, .45), rgba(148, 74, 255, .18) 42%, transparent 68%);
+  animation: pulse-aura .9s ease-in-out infinite;
 }
 .pack-opening p {
   position: absolute;
@@ -290,11 +300,12 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
   text-shadow: 0 0 10px #c77d21;
 }
 .magic-ring {
-  width: 170px;
-  height: 170px;
-  border: 2px solid rgba(255, 213, 95, .78);
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border: 2px solid rgba(255, 213, 95, .9);
   border-radius: 50%;
-  box-shadow: 0 0 24px #d9922f, inset 0 0 28px rgba(255, 223, 127, .35);
+  box-shadow: 0 0 32px #d9922f, inset 0 0 32px rgba(255, 223, 127, .42);
   animation: ring-spin 1.2s linear infinite;
 }
 .magic-ring::before, .magic-ring::after {
@@ -333,8 +344,9 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 .sparkles i:nth-child(5) { left: 50%; top: 18%; animation-delay: .48s; }
 .sparkles i:nth-child(6) { left: 52%; top: 66%; animation-delay: .6s; }
 @keyframes ring-spin { to { transform: rotate(360deg); } }
-@keyframes card-burst { 0%,100% { transform: scale(.86) rotateY(0); } 50% { transform: scale(1.14) rotateY(180deg); } }
+@keyframes card-burst { 0%,100% { transform: scale(.86) rotateY(0); } 50% { transform: scale(1.18) rotateY(180deg); } }
 @keyframes sparkle { 0%,100% { opacity: .2; transform: scale(.5) rotate(45deg); } 50% { opacity: 1; transform: scale(1.4) rotate(45deg); } }
+@keyframes pulse-aura { 0%,100% { opacity: .55; transform: scale(.82); } 50% { opacity: 1; transform: scale(1.18); } }
 @keyframes shine { to { transform: translateX(45%) rotate(12deg); } }
 @media (orientation: portrait) {
   .shelf-grid { width: 128vw; top: 50%; }
