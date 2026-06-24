@@ -1,7 +1,7 @@
 window.CardShop = window.CardShop || {};
 
 window.CardShop.ui = (() => {
-  const { config, collection } = window.CardShop;
+  const { config, collection, income } = window.CardShop;
   const $ = (id) => document.getElementById(id);
   let priceFns = null;
   let collectionLimit = 48;
@@ -15,6 +15,7 @@ window.CardShop.ui = (() => {
     renderPacks(state);
     renderCards(state);
     renderMarket(state);
+    renderIncome(state);
   }
 
   function renderRefreshText(state) {
@@ -52,6 +53,8 @@ window.CardShop.ui = (() => {
       `<button class="filter-chip ${item.key === active ? 'active' : ''}" data-filter-type="${type}" data-filter-value="${item.key}">${item.name}</button>`
     ).join('')}</div>`;
   }
+
+  function renderIncome(state) { $('incomePanel').innerHTML = income.panel(state); }
 
   function renderMarket(state) {
     $('marketText').textContent = `当前行情：${state.marketMood.name}，售价倍率 ${state.marketMood.rate}x`;
@@ -150,5 +153,5 @@ window.CardShop.ui = (() => {
   function resetCollectionLimit() { collectionLimit = 48; }
   function extendCollectionLimit() { collectionLimit += 48; }
 
-  return { setup, renderAll, renderRefreshText, cardHtml, showModal, switchTab, renderSlots, showCover, showLoading, enterGame, resetCollectionLimit, extendCollectionLimit };
+  return { setup, renderAll, renderRefreshText, renderIncome, cardHtml, showModal, switchTab, renderSlots, showCover, showLoading, enterGame, resetCollectionLimit, extendCollectionLimit };
 })();

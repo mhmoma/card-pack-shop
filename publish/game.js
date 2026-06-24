@@ -1,6 +1,6 @@
 (() => {
-  const { config, pokeApi, ui, collection, formulas, saveSystem } = window.CardShop;
-  const fresh = () => ({ gold: config.initialGold, shop: [], packs: [], cards: [], marketMood: null, nextRefresh: 0, tab: 'shop', collectionFilter: null });
+  const { config, pokeApi, ui, collection, formulas, saveSystem, income } = window.CardShop;
+  const fresh = () => ({ gold: config.initialGold, shop: [], packs: [], cards: [], income: null, marketMood: null, nextRefresh: 0, tab: 'shop', collectionFilter: null });
   const state = fresh();
   let selectedPackId = null;
   let selectedOwnedPackId = null;
@@ -8,13 +8,9 @@
   function uid(prefix) { return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`; }
   function pick(list) { return list[Math.floor(Math.random() * list.length)]; }
   function money(n) { return Math.max(0, Math.floor(n)); }
-  function rarityByTotal(total) {
-    return config.rarities.find((rarity) => total >= rarity.minTotal) || config.rarities[config.rarities.length - 1];
-  }
+  function rarityByTotal(total) { return config.rarities.find((rarity) => total >= rarity.minTotal) || config.rarities[config.rarities.length - 1]; }
   function cardValue(total, rarity, shiny) { return formulas.cardValue(total, rarity, shiny); }
-  function shinySprite(id) {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`;
-  }
+  function shinySprite(id) { return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`; }
   function makeShop() {
     state.marketMood = pick(config.marketMoods);
     state.shop = Array.from({ length: 12 }, (_, i) => {
@@ -37,7 +33,7 @@
     Object.assign(state, fresh(), saved || {});
     if (!state.nextRefresh || Date.now() >= state.nextRefresh || state.shop.length < 12) makeShop();
     if (!state.marketMood) state.marketMood = pick(config.marketMoods);
-    collection.tagPokemonData(); collection.tagCards(state.cards);
+    collection.tagPokemonData(); collection.tagCards(state.cards); income.ensure(state);
     state.collectionFilter = collection.normalizeFilter(state.collectionFilter || collection.defaultFilter());
     ui.setup({ pack: marketPackPrice, card: marketCardPrice });
     await normalizeOldCards();
@@ -53,7 +49,7 @@
       makeShop();
       save();
       ui.renderAll(state);
-    } else ui.renderRefreshText(state);
+    } else { ui.renderRefreshText(state); ui.renderIncome(state); }
   }
   async function buyPack(id) {
     const slot = state.shop.find((x) => x.id === id);
@@ -126,6 +122,10 @@
     ui.renderAll(state);
   }
   function toast(msg) { if (window.dzmm?.toast) dzmm.toast.warning(msg); else alert(msg); }
+  function claimIncome() {
+    const gold = income.claim(state);
+    if (gold) { toast(`商会委托收入 +${gold} 金币`); save(); ui.renderAll(state); }
+  }
   function showBuyPopup(id) {
     const slot = state.shop.find((x) => x.id === id);
     if (!slot || slot.sold) return;
@@ -151,6 +151,7 @@
     if (e.target.dataset.open) openPack(e.target.dataset.open);
     if (e.target.dataset.sellPack) sellPack(e.target.dataset.sellPack);
     if (e.target.dataset.sellCard) sellCard(e.target.dataset.sellCard);
+    if (e.target.dataset.claimIncome) claimIncome();
     const filterBtn = e.target.closest('[data-filter-type]');
     if (filterBtn) {
       state.collectionFilter = collection.normalizeFilter(state.collectionFilter || collection.defaultFilter());
