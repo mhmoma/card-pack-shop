@@ -2,6 +2,7 @@
   const { config, storage, pokeApi, ui } = window.CardShop;
   const key = 'card-shop-save-v1';
   const state = { gold: 0, shop: [], packs: [], cards: [], marketMood: null, nextRefresh: 0, tab: 'shop' };
+  let selectedPackId = null;
   const $ = (id) => document.getElementById(id);
 
   function uid(prefix) { return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`; }
@@ -113,7 +114,19 @@
 
   function toast(msg) { if (window.dzmm?.toast) dzmm.toast.warning(msg); else alert(msg); }
 
+  function showBuyPopup(id) {
+    const slot = state.shop.find((x) => x.id === id);
+    if (!slot || slot.sold) return;
+    const pack = config.packTypes[slot.type];
+    selectedPackId = id;
+    $('buyPopupName').textContent = pack.name;
+    $('buyPopupPrice').textContent = `${slot.price} 金币 · ${pack.cards} 张卡`;
+    $('buyPopup').classList.remove('hidden');
+  }
+
   document.addEventListener('click', (e) => {
+    const previewBuy = e.target.closest('[data-preview-buy]');
+    if (previewBuy) showBuyPopup(previewBuy.dataset.previewBuy);
     const buy = e.target.closest('[data-buy]');
     if (buy) buyPack(buy.dataset.buy);
     if (e.target.dataset.open) openPack(e.target.dataset.open);
@@ -123,5 +136,12 @@
   });
 
   $('closeModal').addEventListener('click', () => $('modal').classList.add('hidden'));
+  $('closeBuyPopup').addEventListener('click', () => $('buyPopup').classList.add('hidden'));
+  $('confirmBuyBtn').addEventListener('click', async () => {
+    if (!selectedPackId) return;
+    await buyPack(selectedPackId);
+    $('buyPopup').classList.add('hidden');
+    selectedPackId = null;
+  });
   load();
 })();

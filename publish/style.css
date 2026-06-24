@@ -131,21 +131,34 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 .pos-9 { left: 42.3%; top: 60.5%; }
 .pos-10 { left: 57.7%; top: 60.5%; }
 .pos-11 { left: 73%; top: 60.5%; }
-.shelf-price {
-  position: absolute;
-  left: -50%;
-  right: -50%;
-  bottom: -28%;
-  display: grid;
-  gap: 0;
-  text-align: center;
-  color: #f7e7bd;
-  text-shadow: 0 2px 3px #180806;
-  pointer-events: none;
-}
-.shelf-price b { font-size: clamp(9px, 1.1vw, 12px); }
-.shelf-price span { font-size: clamp(8px, 1vw, 10px); color: #f0c75c; }
 .shelf-item.sold { filter: grayscale(.9); opacity: .45; cursor: default; }
+.buy-popup {
+  position: absolute;
+  left: 50%;
+  top: 68%;
+  z-index: 12;
+  width: 180px;
+  padding: 10px;
+  transform: translateX(-50%);
+  border: 1px solid #b88a47;
+  background: rgba(19, 11, 15, .92);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .45);
+  text-align: center;
+}
+.popup-close {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  width: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  border: 0;
+  background: transparent;
+  color: #d8b66f;
+}
+.popup-name { padding-right: 20px; color: #fff0be; font-weight: 700; }
+.popup-price { margin: 6px 0 8px; color: #f0c75c; font-size: 13px; }
+.popup-buy { width: 100%; min-height: 32px; }
 .panel {
   height: 100%;
   overflow-y: auto;
