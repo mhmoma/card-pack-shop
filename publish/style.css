@@ -123,10 +123,10 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 .pos-1 { left: 42.3%; top: 33%; }
 .pos-2 { left: 57.7%; top: 33%; }
 .pos-3 { left: 73%; top: 33%; }
-.pos-4 { left: 27%; top: 63.5%; }
-.pos-5 { left: 42.3%; top: 63.5%; }
-.pos-6 { left: 57.7%; top: 63.5%; }
-.pos-7 { left: 73%; top: 63.5%; }
+.pos-4 { left: 27%; top: 60.5%; }
+.pos-5 { left: 42.3%; top: 60.5%; }
+.pos-6 { left: 57.7%; top: 60.5%; }
+.pos-7 { left: 73%; top: 60.5%; }
 .shelf-price {
   position: absolute;
   left: -50%;
