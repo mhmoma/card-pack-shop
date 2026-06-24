@@ -115,10 +115,11 @@ window.CardShop.ui = (() => {
   }
 
   function renderSlots(slots) {
-    $('saveSlots').innerHTML = slots.map((slot) => `<div class="save-slot">
-      <b>卡槽 ${slot.slot}</b><span>${slot.hasData ? `${slot.cards} 卡 · ${slot.packs} 包 · ${slot.gold} 金币` : '空卡槽'}</span>
+    $('saveSlots').innerHTML = slots.map((slot) => `<details class="save-slot" ${slot.slot === 1 ? 'open' : ''}>
+      <summary><b>卡槽 ${slot.slot}</b><span>${slot.hasData ? `${slot.cards} 卡 · ${slot.packs} 包` : '空卡槽'}</span></summary>
+      <p>${slot.hasData ? `金币 ${slot.gold} · ${slot.savedAt ? new Date(slot.savedAt).toLocaleString() : '旧存档'}` : '没有存档，可直接开始新游戏。'}</p>
       <div><button data-start-slot="${slot.slot}">${slot.hasData ? '读取' : '新游戏'}</button><button data-save-slot="${slot.slot}">存入</button></div>
-    </div>`).join('');
+    </details>`).join('');
   }
 
   function showCover() {

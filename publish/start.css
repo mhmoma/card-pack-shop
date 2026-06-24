@@ -43,15 +43,35 @@
 }
 .cover-menu p,
 .loading-box p { color: #e8cca0; font-size: 13px; }
-.save-slots { display: grid; gap: 8px; margin-top: 12px; }
+.save-slots {
+  display: grid;
+  gap: 8px;
+  max-height: min(310px, 46dvh);
+  min-height: 0;
+  margin-top: 12px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
 .save-slot {
-  padding: 10px;
+  padding: 0;
   border: 1px solid rgba(169, 114, 52, .52);
   background: rgba(18, 10, 12, .62);
 }
-.save-slot b { display: block; color: #ffe0a1; }
-.save-slot span { display: block; margin: 4px 0 8px; color: #d7b77d; font-size: 12px; }
-.save-slot div { display: flex; gap: 6px; }
+.save-slot summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px;
+  cursor: pointer;
+  list-style: none;
+}
+.save-slot summary::-webkit-details-marker { display: none; }
+.save-slot summary::after { content: '展开'; color: #d2a45e; font-size: 11px; }
+.save-slot[open] summary::after { content: '收起'; }
+.save-slot b { color: #ffe0a1; }
+.save-slot span { color: #d7b77d; font-size: 12px; }
+.save-slot p { padding: 0 10px; color: #d7b77d; font-size: 12px; }
+.save-slot div { display: flex; gap: 6px; padding: 8px 10px 10px; }
 .save-slot button { flex: 1; min-height: 32px; }
 .loading-box {
   width: min(520px, 86vw);
