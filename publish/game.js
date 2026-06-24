@@ -1,5 +1,5 @@
 (() => {
-  const { config, pokeApi, ui, collection, formulas, saveSystem, income } = window.CardShop;
+  const { config, pokeApi, ui, collection, formulas, saveSystem, income, marketTrends } = window.CardShop;
   const fresh = () => ({ gold: config.initialGold, shop: [], packs: [], cards: [], income: null, marketMood: null, nextRefresh: 0, tab: 'shop', collectionFilter: null });
   const state = fresh();
   let selectedPackId = null;
@@ -12,7 +12,7 @@
   function cardValue(total, rarity, shiny) { return formulas.cardValue(total, rarity, shiny); }
   function shinySprite(id) { return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`; }
   function makeShop() {
-    state.marketMood = pick(config.marketMoods);
+    state.marketMood = marketTrends.roll();
     state.shop = Array.from({ length: 12 }, (_, i) => {
       const type = formulas.weightedPackType(config.packTypes);
       const base = config.packTypes[type];
@@ -22,9 +22,9 @@
   }
   function marketPackPrice(pack) {
     const base = config.packTypes[pack.type];
-    return formulas.packMarketValue(base, pack.price, state.marketMood.rate);
+    return formulas.packMarketValue(base, pack.price, state.marketMood.rate * marketTrends.packRate(pack, state.marketMood));
   }
-  function marketCardPrice(card) { return money(card.value * state.marketMood.rate); }
+  function marketCardPrice(card) { return money(card.value * marketTrends.cardRate(card, state.marketMood)); }
   async function save() { await saveSystem.save(state); }
   window.CardShop.gameState = state; window.CardShop.saveGame = save;
   async function startGame(slot) {
@@ -32,7 +32,7 @@
     const saved = await saveSystem.prepare(slot, ui.showLoading);
     Object.assign(state, fresh(), saved || {});
     if (!state.nextRefresh || Date.now() >= state.nextRefresh || state.shop.length < 12) makeShop();
-    if (!state.marketMood) state.marketMood = pick(config.marketMoods);
+    state.marketMood = marketTrends.ensure(state.marketMood);
     collection.tagPokemonData(); collection.tagCards(state.cards); income.ensure(state);
     state.collectionFilter = collection.normalizeFilter(state.collectionFilter || collection.defaultFilter());
     ui.setup({ pack: marketPackPrice, card: marketCardPrice });

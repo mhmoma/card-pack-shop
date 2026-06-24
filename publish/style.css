@@ -206,6 +206,9 @@ h1 {
   text-shadow: 0 2px 2px #080406;
 }
 .section-head p, .pack-card p { color: #d8b982; font-size: 12px; }
+.trend-news { margin-top: 5px; color: #ffe0a0; font-size: 12px; }
+.trend-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.trend-chips span { padding: 3px 7px; border: 1px solid rgba(214, 154, 70, .52); background: rgba(56, 31, 17, .72); color: #ffd56a; font-size: 11px; }
 .collection-filters {
   max-width: 1080px;
   margin: 0 auto 12px;

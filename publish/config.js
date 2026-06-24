@@ -34,9 +34,12 @@ window.CardShop.config = {
     { key: 'common', name: '普通', minTotal: 0, value: 1, shinyChance: 0.04 },
   ],
   marketMoods: [
+    { name: '冰点市场', rate: 0.55 },
     { name: '低迷', rate: 0.72 },
     { name: '平稳', rate: 1 },
+    { name: '小幅升温', rate: 1.18 },
     { name: '火热', rate: 1.38 },
     { name: '收藏热潮', rate: 1.82 },
+    { name: '拍卖狂欢', rate: 2.25 },
   ],
 };

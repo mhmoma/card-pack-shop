@@ -1,7 +1,7 @@
 window.CardShop = window.CardShop || {};
 
 window.CardShop.ui = (() => {
-  const { config, collection, income } = window.CardShop;
+  const { config, collection, income, marketTrends } = window.CardShop;
   const $ = (id) => document.getElementById(id);
   let priceFns = null;
   let collectionLimit = 48;
@@ -57,7 +57,7 @@ window.CardShop.ui = (() => {
   function renderIncome(state) { $('incomePanel').innerHTML = income.panel(state); }
 
   function renderMarket(state) {
-    $('marketText').textContent = `当前行情：${state.marketMood.name}，售价倍率 ${state.marketMood.rate}x`;
+    $('marketText').innerHTML = `当前行情：${state.marketMood.name} ${state.marketMood.rate}x${marketTrends.html(state.marketMood)}`;
     const dupes = state.cards.filter((c, i, arr) => arr.findIndex((x) => x.pokemonId === c.pokemonId) !== i);
     $('marketList').innerHTML = dupes.length ? dupes.map((c) =>
       `<div class="market-item">${cardHtml(c)}<button data-sell-card="${c.id}">出售 ${priceFns.card(c)} 金币</button><button data-list-card="${c.id}">上架交易</button></div>`
