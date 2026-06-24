@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-24T07:17:08Z",
-  "updatedAt": "2026-06-24T10:52:37Z",
+  "updatedAt": "2026-06-24T11:20:52Z",
   "assets": [
     {
       "name": "shop-background",
@@ -256,6 +256,162 @@
       },
       "traceId": "trace_mqrye1tv_i8oobgse",
       "createdAt": "2026-06-24T10:52:37Z"
+    },
+    {
+      "name": "card-template-common",
+      "status": "success",
+      "path": "publish/assets/generated/card-template-common.5f1831c4.webp",
+      "contentHash": "5f1831c4",
+      "revisedPrompt": "Vertical fantasy MMORPG collectible card template, common rarity. Single complete card object centered and isolated. Ornate aged bronze border with premium trading card UI, rounded beveled corners, symmetrical design. The card interior is fully filled, not transparent: warm parchment leather texture inside with subtle vignette and faint engraved pattern, integrated lower name/value plate area, no black empty areas. No creature, no text, no logo, no watermark. Outside the card only: solid uniform chroma key background in exact flat #00B140, no gradient, no shadow, no scenery, no decoration. Clean product render, high detail, card frame only.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 14.2,
+        "edgeGreenBiasPct": 0,
+        "verdict": "FAIL"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 3708741,
+      "finalBytes": 448874,
+      "usage": {
+        "inputTokens": 133,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqrz4n7c_jn7z2ipg",
+      "createdAt": "2026-06-24T11:13:15Z"
+    },
+    {
+      "name": "card-template-uncommon",
+      "status": "success",
+      "path": "publish/assets/generated/card-template-uncommon.2da19b43.webp",
+      "contentHash": "2da19b43",
+      "revisedPrompt": "Vertical fantasy MMORPG collectible card template, uncommon rarity, isolated full card object centered. Complete premium trading card UI with polished silver-blue metal border, rounded beveled corners, symmetrical design, integrated lower name/value plate area, filled inner background (not transparent), inner artwork area showing cool blue magical mist, faint water-light runes, soft vignette, elegant fantasy UI details. No creature, no text, no logo, no watermark. No black empty areas inside the card. Outside the card only: solid uniform exact chroma key flat background #00B140, no gradient, no shadow, no scenery, no decoration. Clean product render, front-facing, crisp edges, high detail.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 23.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "MARGINAL"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 2804361,
+      "finalBytes": 249762,
+      "usage": {
+        "inputTokens": 143,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqrz6igh_v61oxwlo",
+      "createdAt": "2026-06-24T11:14:42Z"
+    },
+    {
+      "name": "card-template-rare",
+      "status": "success",
+      "path": "publish/assets/generated/card-template-rare.efe6fcc6.webp",
+      "contentHash": "efe6fcc6",
+      "revisedPrompt": "Vertical fantasy MMORPG collectible card template, rare rarity. A complete isolated trading card object centered in frame with a royal violet enchanted metal border, ornate but clean premium UI, rounded beveled corners, symmetrical. The card must have a filled inner background, not transparent inside. Inner artwork area: deep purple arcane nebula, amethyst glow, faint magical circle texture, soft vignette, rich layered fantasy energy, no creature. Integrated lower name/value plate area as part of the card design, but no readable text. No text, no logo, no watermark anywhere. No black empty areas inside the card. The entire area outside the card is a solid uniform flat chroma key background exactly #00B140, with no gradient, no shadow, no scenery, no decoration. Isolated full card object on solid #00B140 background only.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 22.3,
+        "edgeGreenBiasPct": 0,
+        "verdict": "MARGINAL"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 3063199,
+      "finalBytes": 333704,
+      "usage": {
+        "inputTokens": 175,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqrz8e1k_86bqjwr9",
+      "createdAt": "2026-06-24T11:16:08Z"
+    },
+    {
+      "name": "card-template-epic",
+      "status": "success",
+      "path": "publish/assets/generated/card-template-epic.7fda81b7.webp",
+      "contentHash": "7fda81b7",
+      "revisedPrompt": "Vertical fantasy MMORPG collectible card template, epic rarity. A complete standalone trading card object with ornate golden frame and a fully filled inner background (not transparent inside), no empty black areas. Inner artwork area features a radiant amber sunburst, molten gold magical haze, faint heroic rune pattern, soft vignette, luxurious integrated lower name/value plate, symmetrical, rounded beveled corners, premium fantasy UI design, highly detailed, polished metal and jewel-like accents. The card is isolated on a solid uniform chroma key flat background outside the card only, exact #00B140, no gradient, no shadow, no scenery, no decoration. No creature, no text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 19.8,
+        "edgeGreenBiasPct": 0,
+        "verdict": "FAIL"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 2901237,
+      "finalBytes": 350244,
+      "usage": {
+        "inputTokens": 143,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqrza9m0_bkfn2xk9",
+      "createdAt": "2026-06-24T11:17:46Z"
+    },
+    {
+      "name": "card-template-legendary",
+      "status": "success",
+      "path": "publish/assets/generated/card-template-legendary.49989cb4.webp",
+      "contentHash": "49989cb4",
+      "revisedPrompt": "Vertical fantasy MMORPG collectible card template, legendary rarity. A complete isolated trading card object with a mythic prismatic gold-magenta celestial frame, ornate high-value UI, rounded beveled corners, symmetrical composition. The card is fully filled inside, not transparent: luminous cosmic rainbow aurora, star dust, opal light, divine magical energy, soft vignette, integrated lower name/value plate area, premium fantasy card design. No creature, no text, no logo, no watermark, no black empty areas inside. The card is centered on a solid uniform chroma key flat background outside the card only, exact #00B140, with no gradient, no shadow, no scenery, no decoration.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 12.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "FAIL"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 3236849,
+      "finalBytes": 446484,
+      "usage": {
+        "inputTokens": 145,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqrzcdb3_y1tqbw5c",
+      "createdAt": "2026-06-24T11:19:21Z"
+    },
+    {
+      "name": "card-template-shiny",
+      "status": "success",
+      "path": "publish/assets/generated/card-template-shiny.e2de9b15.webp",
+      "contentHash": "e2de9b15",
+      "revisedPrompt": "Vertical fantasy MMORPG collectible card template, special shiny holographic rarity. A complete card with iridescent rainbow foil border and a filled inner background, not transparent inside. Inner artwork area has pearlescent hologram foil, star sparkles, shifting rainbow light bands, opal crystals, premium collector card look, integrated lower name/value plate, rounded beveled corners, symmetrical, no black empty areas, no creature, no text, no logo, no watermark. This should clearly look different from all normal rarities. Isolated full card object on SOLID UNIFORM #00B140 chroma key flat background outside the card only. Outside background is one flat exact #00B140 color, no gradient, no shadow, no scenery, no decoration.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 11.9,
+        "edgeGreenBiasPct": 0,
+        "verdict": "FAIL"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 2773154,
+      "finalBytes": 315698,
+      "usage": {
+        "inputTokens": 157,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqrzednw_axfvmu2r",
+      "createdAt": "2026-06-24T11:20:52Z"
     }
   ]
 }
