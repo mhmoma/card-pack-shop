@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>My Game</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body>
+  <div class="container" x-data="app">
+    <div class="card" x-show="!ready">
+      <p>SDK 加载中...</p>
+    </div>
+
+    <div class="card" x-show="ready" x-transition>
+      <div class="header" x-show="userName">
+        <template x-if="userAvatar">
+          <img :src="userAvatar" class="avatar" />
+        </template>
+        <span x-text="userName"></span>
+      </div>
+      <h1>Hello World</h1>
+      <p class="hint">编辑 app.js 开始创作</p>
+    </div>
+  </div>
+</body>
+</html>
