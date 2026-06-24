@@ -72,7 +72,9 @@ window.CardShop.ui = (() => {
     const data = window.CardShop.pokemonData.byId[card.pokemonId];
     const name = data?.zh || card.name;
     const types = data?.types || card.types;
-    const sprite = data?.sprite || card.sprite;
+    const sprite = card.shiny
+      ? (card.sprite || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${card.pokemonId}.png`)
+      : (data?.sprite || card.sprite);
     const bgKey = card.shiny ? 'cardBgShiny' : `cardBg${card.rarity.key[0].toUpperCase()}${card.rarity.key.slice(1)}`;
     return `<article class="poke-card ${card.rarity.key} ${card.shiny ? 'shiny' : ''}">
       <img class="card-bg" src="${config.assets[bgKey]}" alt="" loading="lazy">
