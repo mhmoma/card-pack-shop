@@ -191,8 +191,11 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
   min-height: 168px;
   padding: 7px;
   border: 0;
+  border-radius: 10px 10px 16px 16px;
+  clip-path: polygon(8% 0, 92% 0, 100% 7%, 100% 93%, 91% 100%, 9% 100%, 0 93%, 0 7%);
   background: #120c11;
   text-align: center;
+  transform: perspective(420px) rotateX(.8deg);
 }
 .pack-card.sold { filter: grayscale(.8); opacity: .55; }
 .pack-art { height: 110px; display: grid; place-items: center; }
@@ -208,34 +211,73 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 .card-bg {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 2;
   width: 100%;
   height: 100%;
   object-fit: fill;
   pointer-events: none;
 }
+.poke-card::after {
+  content: '';
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 18%;
+  bottom: 37%;
+  z-index: 0;
+  border-radius: 42% 42% 18% 18%;
+  background: var(--card-field);
+  box-shadow: inset 0 0 18px rgba(255,255,255,.16), 0 0 18px var(--card-glow);
+}
 .pokemon-art {
   position: relative;
-  z-index: 1;
-  width: 72%;
-  height: 46%;
+  z-index: 3;
+  width: 68%;
+  height: 42%;
   margin-top: 22%;
   object-fit: contain;
   image-rendering: auto;
-  filter: drop-shadow(0 8px 7px rgba(0, 0, 0, .45));
+  filter: drop-shadow(0 8px 7px rgba(0, 0, 0, .55));
 }
-.poke-card h3, .poke-card p, .poke-card strong { position: relative; z-index: 1; text-shadow: 0 2px 4px #12070a; }
-.poke-card.common { box-shadow: 0 0 10px rgba(157, 139, 108, .22); }
-.poke-card.uncommon { box-shadow: 0 0 14px rgba(78, 179, 255, .3); }
-.poke-card.rare { box-shadow: 0 0 16px rgba(157, 108, 255, .34); }
-.poke-card.epic { box-shadow: 0 0 18px rgba(255, 209, 95, .38); }
-.poke-card.legendary { box-shadow: 0 0 24px rgba(255, 124, 229, .46); }
+.poke-card h3, .poke-card p, .poke-card strong { position: relative; z-index: 3; text-shadow: 0 2px 4px #12070a; }
+.poke-card.common {
+  --card-field: radial-gradient(circle at 50% 40%, #5b4a35, #241a14 58%, #10090b);
+  --card-glow: rgba(157, 139, 108, .22);
+  box-shadow: 0 0 10px rgba(157, 139, 108, .22);
+}
+.poke-card.uncommon {
+  --card-field: radial-gradient(circle at 50% 40%, #2b91d0, #123756 58%, #08111e);
+  --card-glow: rgba(78, 179, 255, .38);
+  box-shadow: 0 0 14px rgba(78, 179, 255, .3);
+}
+.poke-card.rare {
+  --card-field: radial-gradient(circle at 50% 38%, #8d62ff, #33195d 58%, #11091d);
+  --card-glow: rgba(157, 108, 255, .46);
+  box-shadow: 0 0 16px rgba(157, 108, 255, .34);
+}
+.poke-card.epic {
+  --card-field: radial-gradient(circle at 50% 38%, #ffd76a, #7a4210 56%, #160d08);
+  --card-glow: rgba(255, 209, 95, .52);
+  box-shadow: 0 0 18px rgba(255, 209, 95, .38);
+}
+.poke-card.legendary {
+  --card-field: conic-gradient(from 20deg, #ff7ce5, #7ed9ff, #ffe66d, #a16cff, #ff7ce5);
+  --card-glow: rgba(255, 124, 229, .62);
+  box-shadow: 0 0 24px rgba(255, 124, 229, .46);
+}
+.poke-card.shiny::after {
+  background: conic-gradient(from 0deg, #ff5bd6, #5ee7ff, #fff47a, #8dff8a, #a875ff, #ff5bd6);
+  animation: holo-field 3.2s linear infinite;
+}
 .poke-card.shiny::before {
   content: '';
   position: absolute;
-  inset: -60%;
-  background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.35), transparent 65%);
-  animation: shine 2.4s linear infinite;
+  inset: -45%;
+  z-index: 4;
+  background: linear-gradient(115deg, transparent 34%, rgba(255,255,255,.5), transparent 56%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: shine 2.2s linear infinite;
 }
 .tag {
   position: absolute;
@@ -375,6 +417,7 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 @keyframes card-burst { 0%,100% { transform: scale(.86) rotateY(0); } 50% { transform: scale(1.18) rotateY(180deg); } }
 @keyframes sparkle { 0%,100% { opacity: .2; transform: scale(.5) rotate(45deg); } 50% { opacity: 1; transform: scale(1.4) rotate(45deg); } }
 @keyframes pulse-aura { 0%,100% { opacity: .55; transform: scale(.82); } 50% { opacity: 1; transform: scale(1.18); } }
+@keyframes holo-field { to { filter: hue-rotate(360deg); } }
 @keyframes shine { to { transform: translateX(45%) rotate(12deg); } }
 @media (orientation: portrait) {
   .shelf-grid { width: 128vw; top: 50%; }
