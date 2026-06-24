@@ -50,6 +50,7 @@
     ui.setup({ pack: marketPackPrice, card: marketCardPrice });
     await normalizeOldCards();
     ui.renderAll(state);
+    ui.switchTab(state.tab || 'shop');
     setInterval(tick, 1000);
     await save();
   }
@@ -158,7 +159,9 @@
     if (e.target.dataset.sellCard) sellCard(e.target.dataset.sellCard);
     if (e.target.dataset.tab) {
       $('buyPopup').classList.add('hidden');
-      ui.switchTab(e.target.dataset.tab);
+      state.tab = e.target.dataset.tab;
+      ui.switchTab(state.tab);
+      save();
     }
   });
 

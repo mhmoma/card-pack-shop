@@ -94,6 +94,7 @@ window.CardShop.ui = (() => {
       $(`${name}View`).classList.toggle('hidden', name !== tab);
       document.querySelector(`[data-tab="${name}"]`).classList.toggle('active', name === tab);
     });
+    document.body.classList.toggle('shop-active', tab === 'shop');
   }
 
   return { setup, renderAll, renderRefreshText, cardHtml, showModal, switchTab };
