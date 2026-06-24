@@ -26,7 +26,7 @@ window.CardShop.ui = (() => {
   function renderShop(state) {
     $('shopGrid').innerHTML = state.shop.map((slot) => {
       const action = slot.sold ? '<span class="sold-label">已售罄</span>' : '<button class="buy-btn">购买</button>';
-      return `<div class="shelf-slot" data-buy="${slot.id}">${packCard(slot)}${action}</div>`;
+      return `<div class="shelf-slot ${slot.sold ? 'sold' : ''}" data-buy="${slot.id}">${shelfPack(slot)}${action}</div>`;
     }).join('');
   }
 
@@ -48,6 +48,16 @@ window.CardShop.ui = (() => {
     $('marketList').innerHTML = dupes.length ? dupes.map((c) =>
       `<div class="market-item">${cardHtml(c)}<button data-sell-card="${c.id}">出售 ${priceFns.card(c)} 金币</button></div>`
     ).join('') : '<div class="empty">没有重复卡可出售。未开卡包可在“卡包”页出售。</div>';
+  }
+
+  function shelfPack(slot) {
+    const pack = config.packTypes[slot.type];
+    const img = config.assets[pack.image];
+    return `<div class="shelf-frame">
+      <img class="frame-img" src="${config.assets.shelfFrame}" alt="货架格子">
+      <img class="shelf-pack-img" src="${img}" alt="${pack.name}">
+      <div class="shelf-price"><b>${pack.name}</b><span>${slot.price} 金币</span></div>
+    </div>`;
   }
 
   function packCard(slot, owned) {

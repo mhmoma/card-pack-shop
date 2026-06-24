@@ -95,14 +95,51 @@ p { color: #e2cda5; font-size: 13px; }
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 210px;
-  padding: 10px;
+  min-height: 250px;
+  padding: 0;
   border-radius: 18px;
-  border: 1px solid rgba(255, 220, 135, .4);
-  background: radial-gradient(circle at 50% 18%, rgba(255, 234, 158, .16), transparent 48%), rgba(22, 10, 13, .58);
-  transition: transform .16s, box-shadow .16s;
+  background: transparent;
+  transition: transform .16s, filter .16s;
 }
-.shelf-slot:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0, 0, 0, .28); }
+.shelf-slot:hover { transform: translateY(-3px); filter: drop-shadow(0 14px 16px rgba(0, 0, 0, .36)); }
+.shelf-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+}
+.frame-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+.shelf-pack-img {
+  width: 42%;
+  height: 50%;
+  object-fit: contain;
+  transform: translateY(-4%);
+  filter: drop-shadow(0 12px 10px rgba(0, 0, 0, .55));
+  z-index: 1;
+}
+.shelf-price {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 12%;
+  z-index: 3;
+  display: grid;
+  gap: 2px;
+  text-align: center;
+  color: #fff1be;
+  text-shadow: 0 2px 3px #2b1400;
+}
+.shelf-price b { font-size: 13px; }
+.shelf-price span { font-size: 12px; color: #ffd76f; }
 .pack-card, .poke-card, .owned-pack, .market-item {
   border-radius: 18px;
   border: 1px solid rgba(255, 227, 145, .35);
@@ -110,16 +147,17 @@ p { color: #e2cda5; font-size: 13px; }
   padding: 10px;
   text-align: center;
 }
-.pack-card.sold { filter: grayscale(.8); opacity: .55; }
+.pack-card.sold, .shelf-slot.sold .shelf-frame { filter: grayscale(.8); opacity: .58; }
 .pack-art { height: 110px; display: grid; place-items: center; }
 .pack-art img { max-height: 122px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 12px 12px rgba(0,0,0,.45)); }
 .pack-card h3, .poke-card h3 { font-size: 15px; color: #fff3be; }
 .pack-card strong, .poke-card strong { display: block; margin-top: 6px; color: #ffd76f; }
 .buy-btn, .sold-label {
   position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 12px;
+  left: 18%;
+  right: 18%;
+  bottom: 0;
+  z-index: 4;
 }
 .sold-label {
   min-height: 44px;
