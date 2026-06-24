@@ -77,7 +77,7 @@
     const pack = state.packs.find((x) => x.id === id);
     if (!pack) return;
     const base = config.packTypes[pack.type];
-    ui.showModal('开包中...', '<div class="empty">正在拆封卡包，卡牌能量正在显现...</div>');
+    ui.showModal('开包中...', '<div class="pack-opening"><div class="magic-ring"></div><div class="burst-card"></div><div class="sparkles"><i></i><i></i><i></i><i></i><i></i><i></i></div><p>封印正在解除，稀有卡牌即将显现...</p></div>');
     try {
       const cards = [];
       for (let i = 0; i < base.cards; i++) cards.push(await makeCard(base.rareBoost));

@@ -274,6 +274,66 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
   background: #170f18;
 }
 .close-btn { position: absolute; top: 10px; right: 10px; width: 44px; }
+.pack-opening {
+  position: relative;
+  min-height: 260px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #ffe7a3;
+}
+.pack-opening p {
+  position: absolute;
+  bottom: 18px;
+  color: #ffe7a3;
+  text-shadow: 0 0 10px #c77d21;
+}
+.magic-ring {
+  width: 170px;
+  height: 170px;
+  border: 2px solid rgba(255, 213, 95, .78);
+  border-radius: 50%;
+  box-shadow: 0 0 24px #d9922f, inset 0 0 28px rgba(255, 223, 127, .35);
+  animation: ring-spin 1.2s linear infinite;
+}
+.magic-ring::before, .magic-ring::after {
+  content: '';
+  position: absolute;
+  inset: 50%;
+  width: 230px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffe783, transparent);
+  transform-origin: 0 0;
+}
+.magic-ring::before { transform: rotate(35deg) translate(-50%, -50%); }
+.magic-ring::after { transform: rotate(-35deg) translate(-50%, -50%); }
+.burst-card {
+  position: absolute;
+  width: 88px;
+  height: 126px;
+  border: 2px solid #ffe783;
+  background: linear-gradient(145deg, #4b2370, #f4c14d 48%, #182c5a);
+  box-shadow: 0 0 30px rgba(255, 222, 118, .75);
+  animation: card-burst 1.05s ease-in-out infinite;
+}
+.sparkles i {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #fff3a6;
+  box-shadow: 0 0 12px #ffe783;
+  transform: rotate(45deg);
+  animation: sparkle 1.2s ease-in-out infinite;
+}
+.sparkles i:nth-child(1) { left: 26%; top: 28%; animation-delay: 0s; }
+.sparkles i:nth-child(2) { left: 68%; top: 25%; animation-delay: .12s; }
+.sparkles i:nth-child(3) { left: 73%; top: 57%; animation-delay: .24s; }
+.sparkles i:nth-child(4) { left: 28%; top: 60%; animation-delay: .36s; }
+.sparkles i:nth-child(5) { left: 50%; top: 18%; animation-delay: .48s; }
+.sparkles i:nth-child(6) { left: 52%; top: 66%; animation-delay: .6s; }
+@keyframes ring-spin { to { transform: rotate(360deg); } }
+@keyframes card-burst { 0%,100% { transform: scale(.86) rotateY(0); } 50% { transform: scale(1.14) rotateY(180deg); } }
+@keyframes sparkle { 0%,100% { opacity: .2; transform: scale(.5) rotate(45deg); } 50% { opacity: 1; transform: scale(1.4) rotate(45deg); } }
 @keyframes shine { to { transform: translateX(45%) rotate(12deg); } }
 @media (orientation: portrait) {
   .shelf-grid { width: 128vw; top: 50%; }
