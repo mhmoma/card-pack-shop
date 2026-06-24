@@ -1,7 +1,7 @@
 window.CardShop = window.CardShop || {};
 
 window.CardShop.ui = (() => {
-  const { config } = window.CardShop;
+  const { config, collection } = window.CardShop;
   const $ = (id) => document.getElementById(id);
   let priceFns = null;
 
@@ -38,8 +38,19 @@ window.CardShop.ui = (() => {
   }
 
   function renderCards(state) {
-    $('collectionInfo').textContent = `${state.cards.length} 张卡 · ${new Set(state.cards.map((c) => c.pokemonId)).size} 种宝可梦`;
-    $('cardsGrid').innerHTML = state.cards.length ? state.cards.map(cardHtml).join('') : '<div class="empty">还没有收藏，打开卡包试试。</div>';
+    const filter = state.collectionFilter || collection.defaultFilter();
+    const shown = collection.filterCards(state.cards, filter);
+    $('collectionInfo').textContent = collection.stats(state.cards, shown, filter);
+    $('collectionFilters').innerHTML = filterGroup('region', collection.regions, filter.region)
+      + filterGroup('generation', collection.generations, filter.generation)
+      + filterGroup('quality', collection.qualities, filter.quality);
+    $('cardsGrid').innerHTML = shown.length ? shown.map(cardHtml).join('') : '<div class="empty">当前分类暂无卡片，换个地区或品质看看。</div>';
+  }
+
+  function filterGroup(type, items, active) {
+    return `<div class="filter-row">${items.map((item) =>
+      `<button class="filter-chip ${item.key === active ? 'active' : ''}" data-filter-type="${type}" data-filter-value="${item.key}">${item.name}</button>`
+    ).join('')}</div>`;
   }
 
   function renderMarket(state) {

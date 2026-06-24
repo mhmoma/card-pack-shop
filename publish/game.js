@@ -1,7 +1,7 @@
 (() => {
-  const { config, storage, pokeApi, ui } = window.CardShop;
+  const { config, storage, pokeApi, ui, collection } = window.CardShop;
   const key = 'card-shop-save-v1';
-  const state = { gold: 0, shop: [], packs: [], cards: [], marketMood: null, nextRefresh: 0, tab: 'shop' };
+  const state = { gold: 0, shop: [], packs: [], cards: [], marketMood: null, nextRefresh: 0, tab: 'shop', collectionFilter: null };
   let selectedPackId = null;
   const $ = (id) => document.getElementById(id);
 
@@ -47,6 +47,7 @@
     Object.assign(state, saved || { gold: config.initialGold });
     if (!state.nextRefresh || Date.now() >= state.nextRefresh || state.shop.length < 12) makeShop();
     if (!state.marketMood) state.marketMood = pick(config.marketMoods);
+    if (!state.collectionFilter) state.collectionFilter = collection.defaultFilter();
     ui.setup({ pack: marketPackPrice, card: marketCardPrice });
     await normalizeOldCards();
     ui.renderAll(state);
@@ -157,6 +158,11 @@
     if (e.target.dataset.open) openPack(e.target.dataset.open);
     if (e.target.dataset.sellPack) sellPack(e.target.dataset.sellPack);
     if (e.target.dataset.sellCard) sellCard(e.target.dataset.sellCard);
+    if (e.target.dataset.filterType) {
+      state.collectionFilter[e.target.dataset.filterType] = e.target.dataset.filterValue;
+      ui.renderAll(state);
+      save();
+    }
     if (e.target.dataset.tab) {
       $('buyPopup').classList.add('hidden');
       state.tab = e.target.dataset.tab;

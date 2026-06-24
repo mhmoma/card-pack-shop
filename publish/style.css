@@ -203,6 +203,38 @@ h1 {
   text-shadow: 0 2px 2px #080406;
 }
 .section-head p, .pack-card p { color: #d8b982; font-size: 12px; }
+.collection-filters {
+  max-width: 1080px;
+  margin: 0 auto 12px;
+  padding: 10px;
+  border: 1px solid rgba(156, 105, 45, .48);
+  background: linear-gradient(180deg, rgba(31, 18, 16, .72), rgba(10, 7, 10, .55));
+  box-shadow: inset 0 0 14px rgba(206, 142, 57, .08);
+}
+.filter-row {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  padding: 3px 0;
+  overscroll-behavior-x: contain;
+}
+.filter-chip {
+  flex: 0 0 auto;
+  min-width: auto;
+  min-height: 28px;
+  padding: 0 9px;
+  border-color: rgba(149, 100, 45, .48);
+  color: #c9aa73;
+  font-size: 11px;
+  letter-spacing: .02em;
+  background: linear-gradient(180deg, rgba(44, 27, 20, .72), rgba(16, 10, 12, .72));
+}
+.filter-chip.active {
+  color: #ffe9a8;
+  border-color: rgba(231, 170, 78, .88);
+  background: linear-gradient(180deg, rgba(128, 76, 29, .9), rgba(45, 25, 16, .88));
+  box-shadow: inset 0 0 10px rgba(255, 197, 91, .16);
+}
 .poke-card p { color: #f0dcaa; font-size: 10px; font-family: Arial, 'Microsoft YaHei', sans-serif; }
 .pack-card, .owned-pack, .market-item {
   border: 1px solid rgba(148, 104, 48, .72);
