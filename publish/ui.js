@@ -73,9 +73,11 @@ window.CardShop.ui = (() => {
     const name = data?.zh || card.name;
     const types = data?.types || card.types;
     const sprite = data?.sprite || card.sprite;
+    const bgKey = `cardBg${card.rarity.key[0].toUpperCase()}${card.rarity.key.slice(1)}`;
     return `<article class="poke-card ${card.rarity.key} ${card.shiny ? 'shiny' : ''}">
+      <img class="card-bg" src="${config.assets[bgKey]}" alt="" loading="lazy">
       <span class="tag">${card.rarity.name}${card.shiny ? ' 闪' : ''}</span>
-      <img src="${sprite}" alt="${name}" loading="lazy">
+      <img class="pokemon-art" src="${sprite}" alt="${name}" loading="lazy">
       <h3>${name}</h3><p>${types.join(' / ')}</p>
       <strong>价值 ${priceFns.card(card)}</strong></article>`;
   }

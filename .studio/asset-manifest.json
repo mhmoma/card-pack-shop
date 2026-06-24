@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-24T07:17:08Z",
-  "updatedAt": "2026-06-24T07:24:03Z",
+  "updatedAt": "2026-06-24T10:52:37Z",
   "assets": [
     {
       "name": "shop-background",
@@ -126,6 +126,136 @@
       },
       "traceId": "trace_mqrqya2k_jht2ip7w",
       "createdAt": "2026-06-24T07:24:03Z"
+    },
+    {
+      "name": "card-bg-common",
+      "status": "success",
+      "path": "publish/assets/generated/card-bg-common.9c4911be.webp",
+      "contentHash": "9c4911be",
+      "revisedPrompt": "Fantasy MMORPG collectible card background frame for common rarity, vertical trading card template. Design a premium but restrained ornate frame with aged bronze and warm dark leather materials, subtle parchment center panel reserved for creature artwork, ornamental metal corners, clean illustrated UI edges, fantasy collectible card aesthetic. No text, no logo, no watermark. Place the card frame strictly on a SOLID UNIFORM #00B140 chroma key flat color background that fills all pixels outside the object. The background must be a single perfectly uniform shade of #00B140 with no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background exactly like a green screen for VFX compositing.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 25.3,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 3002048,
+      "finalBytes": 277902,
+      "usage": {
+        "inputTokens": 150,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqry6ayw_mvxvsdl6",
+      "createdAt": "2026-06-24T10:46:35Z"
+    },
+    {
+      "name": "card-bg-uncommon",
+      "status": "success",
+      "path": "publish/assets/generated/card-bg-uncommon.023dc73b.webp",
+      "contentHash": "023dc73b",
+      "revisedPrompt": "Fantasy MMORPG collectible card background frame for an uncommon rarity, vertical trading card template. Polished silver-blue steel frame with cool blue gem accents, subtle arcane water-light pattern integrated into the frame, clean illustrated UI edges, and a clear empty center panel for creature artwork. No text, no logo, no watermark. The entire object is isolated and placed on a SOLID UNIFORM #00B140 chroma key flat color background filling 100% of pixels not occupied by the frame. Background must be a single flat shade #00B140 with absolutely no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure green screen look for VFX compositing.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 72.7,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1729980,
+      "finalBytes": 119116,
+      "usage": {
+        "inputTokens": 149,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqry884r_87hn81qq",
+      "createdAt": "2026-06-24T10:47:55Z"
+    },
+    {
+      "name": "card-bg-rare",
+      "status": "success",
+      "path": "publish/assets/generated/card-bg-rare.4580b958.webp",
+      "contentHash": "4580b958",
+      "revisedPrompt": "Fantasy MMORPG collectible card background frame for rare rarity, vertical trading card template, royal violet enchanted metal frame, amethyst jewel accents, mystical purple glow, elegant arcane filigree, clear center panel for creature artwork, high quality game UI card asset, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the object. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 69.1,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 2011917,
+      "finalBytes": 173332,
+      "usage": {
+        "inputTokens": 163,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqry9xi5_sv4jywlw",
+      "createdAt": "2026-06-24T10:49:19Z"
+    },
+    {
+      "name": "card-bg-epic",
+      "status": "success",
+      "path": "publish/assets/generated/card-bg-epic.0774e94b.webp",
+      "contentHash": "0774e94b",
+      "revisedPrompt": "Vertical trading card template for a fantasy MMORPG collectible card, epic rarity, ornate golden frame with radiant amber crystals, heroic magical glow, engraved sunburst filigree, luxurious but readable central panel reserved for creature artwork, high-quality fantasy game UI card asset, symmetrical composition, crisp edges, highly detailed metalwork, no text, no logo, no watermark. The entire background outside the card/frame object must be a perfectly uniform solid chroma key green #00B140, flat and featureless, with 100% of non-object pixels exactly that color, no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 27.8,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 2718331,
+      "finalBytes": 299552,
+      "usage": {
+        "inputTokens": 139,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqrybxrb_60j9g72s",
+      "createdAt": "2026-06-24T10:51:00Z"
+    },
+    {
+      "name": "card-bg-legendary",
+      "status": "success",
+      "path": "publish/assets/generated/card-bg-legendary.c1560a61.webp",
+      "contentHash": "c1560a61",
+      "revisedPrompt": "Vertical fantasy MMORPG collectible card background frame template for legendary rarity. A mythic prismatic gold and magenta celestial trading card frame with opal jewels, rainbow arcane aura accents, and dragon-scale inspired filigree, but absolutely no creature or character. High-value divine collector card energy, ornate premium UI asset. Include a clear empty center panel for creature artwork. No text, no logo, no watermark. The card/frame object must be isolated on a SOLID UNIFORM #00B140 chroma key flat background that fills the entire rest of the image. The background must be a single uniform shade of #00B140 green, 100% flat with no gradient, no shadow, no texture, no scenery, no ground, no environmental elements. Pure greenscreen compositing background.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 64,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 2365943,
+      "finalBytes": 298440,
+      "usage": {
+        "inputTokens": 165,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqrye1tv_i8oobgse",
+      "createdAt": "2026-06-24T10:52:37Z"
     }
   ]
 }

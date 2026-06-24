@@ -10,6 +10,11 @@ window.CardShop.config = {
     commonPack: './assets/generated/pack-common.6c28cdde.webp',
     premiumPack: './assets/generated/pack-premium.3641f824.webp',
     mysteryPack: './assets/generated/pack-mystery.79d21089.webp',
+    cardBgCommon: './assets/generated/card-bg-common.9c4911be.webp',
+    cardBgUncommon: './assets/generated/card-bg-uncommon.023dc73b.webp',
+    cardBgRare: './assets/generated/card-bg-rare.4580b958.webp',
+    cardBgEpic: './assets/generated/card-bg-epic.0774e94b.webp',
+    cardBgLegendary: './assets/generated/card-bg-legendary.c1560a61.webp',
   },
   packTypes: {
     common: { name: '普通卡包', price: 100, cards: 3, image: 'commonPack', rareBoost: 0, market: 0.75 },

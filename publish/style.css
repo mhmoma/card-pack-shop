@@ -178,10 +178,20 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 }
 .section-head p, .pack-card p { color: #d9bf8c; font-size: 13px; }
 .poke-card p { color: #d9bf8c; font-size: 12px; }
-.pack-card, .poke-card, .owned-pack, .market-item {
+.pack-card, .owned-pack, .market-item {
   border: 1px solid rgba(160, 116, 56, .65);
   background: linear-gradient(160deg, rgba(54, 32, 22, .88), rgba(17, 10, 16, .94));
   padding: 10px;
+  text-align: center;
+}
+.poke-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 2 / 3;
+  min-height: 168px;
+  padding: 7px;
+  border: 0;
+  background: #120c11;
   text-align: center;
 }
 .pack-card.sold { filter: grayscale(.8); opacity: .55; }
@@ -195,13 +205,31 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
   gap: 8px;
 }
 .cards-grid.compact { grid-template-columns: repeat(auto-fit, minmax(108px, 1fr)); }
-.poke-card { position: relative; overflow: hidden; min-height: 168px; padding: 7px; }
-.poke-card img { width: 82px; height: 82px; object-fit: contain; image-rendering: auto; }
-.poke-card.common { border-color: #9d8b6c; background: linear-gradient(160deg, #34291f, #120c11); }
-.poke-card.uncommon { border-color: #4eb3ff; background: linear-gradient(160deg, #17334c, #0e1019); box-shadow: inset 0 0 18px rgba(78, 179, 255, .18); }
-.poke-card.rare { border-color: #9d6cff; background: linear-gradient(160deg, #322052, #100d18); box-shadow: inset 0 0 20px rgba(157, 108, 255, .22); }
-.poke-card.epic { border-color: #ffd15f; background: linear-gradient(160deg, #5c3c12, #17100c); box-shadow: 0 0 16px rgba(255, 209, 95, .22), inset 0 0 20px rgba(255, 209, 95, .18); }
-.poke-card.legendary { border-color: #ff7ce5; background: linear-gradient(135deg, #40205a, #5b2b18 52%, #102b4e); box-shadow: 0 0 22px rgba(255, 124, 229, .36), inset 0 0 24px rgba(126, 217, 255, .2); }
+.card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+.pokemon-art {
+  position: relative;
+  z-index: 1;
+  width: 72%;
+  height: 46%;
+  margin-top: 22%;
+  object-fit: contain;
+  image-rendering: auto;
+  filter: drop-shadow(0 8px 7px rgba(0, 0, 0, .45));
+}
+.poke-card h3, .poke-card p, .poke-card strong { position: relative; z-index: 1; text-shadow: 0 2px 4px #12070a; }
+.poke-card.common { box-shadow: 0 0 10px rgba(157, 139, 108, .22); }
+.poke-card.uncommon { box-shadow: 0 0 14px rgba(78, 179, 255, .3); }
+.poke-card.rare { box-shadow: 0 0 16px rgba(157, 108, 255, .34); }
+.poke-card.epic { box-shadow: 0 0 18px rgba(255, 209, 95, .38); }
+.poke-card.legendary { box-shadow: 0 0 24px rgba(255, 124, 229, .46); }
 .poke-card.shiny::before {
   content: '';
   position: absolute;
