@@ -27,7 +27,7 @@ window.CardShop.tradeMarket = (() => {
 
   function listingHtml(item, cardHtml) {
     const card = cardFromMarket(item);
-    return `<div class="trade-item">${cardHtml(card)}<p>${item.sellerTag} · 暗号 ${item.code}</p><button data-buy-listing="${item.code}" data-price="${item.price}">购买 ${item.price} 金币</button></div>`;
+    return `<div class="trade-item">${cardHtml(card)}<p>${item.sellerTag} · ${item.price} 金币</p><button data-buy-listing="${item.code}" data-price="${item.price}">购买</button></div>`;
   }
 
   async function list(cardHtml, append = false) {
