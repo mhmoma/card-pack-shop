@@ -96,23 +96,19 @@
     const rarity = rollRarity(boost);
     const p = await pokeApi.getRandom(rarity.maxId);
     const shiny = Math.random() < 0.035 + boost / 4;
-    return { id: uid('card'), pokemonId: p.id, name: p.name, sprite: p.sprite, types: p.types.map(typeName), rarity, shiny, value: money((20 + p.stats / 8) * rarity.value * (shiny ? 3 : 1)) };
+    return { id: uid('card'), pokemonId: p.id, name: p.name, sprite: p.sprite, types: p.types, rarity, shiny, value: money((20 + p.stats / 8) * rarity.value * (shiny ? 3 : 1)) };
   }
 
   async function localizeOldCards() {
     const oldCards = state.cards.filter((c) => /[a-z]/i.test(c.name));
     if (!oldCards.length) return;
-    try {
-      for (const card of oldCards) {
-        const p = await pokeApi.getPokemon(card.pokemonId);
-        card.name = p.name;
-        card.sprite = p.sprite || card.sprite;
-        card.types = p.types.map(typeName);
-      }
-      await save();
-    } catch (err) {
-      console.warn('localize cards failed:', err.message);
+    for (const card of oldCards) {
+      const p = await pokeApi.getPokemon(card.pokemonId);
+      card.name = p.name;
+      card.sprite = p.sprite || card.sprite;
+      card.types = p.types;
     }
+    await save();
   }
 
   async function sellPack(id) {
