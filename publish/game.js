@@ -69,6 +69,7 @@
   }
 
   async function openPack(id) {
+    $('buyPopup').classList.add('hidden');
     const pack = state.packs.find((x) => x.id === id);
     if (!pack) return;
     const base = config.packTypes[pack.type];
@@ -132,7 +133,10 @@
     if (e.target.dataset.open) openPack(e.target.dataset.open);
     if (e.target.dataset.sellPack) sellPack(e.target.dataset.sellPack);
     if (e.target.dataset.sellCard) sellCard(e.target.dataset.sellCard);
-    if (e.target.dataset.tab) ui.switchTab(e.target.dataset.tab);
+    if (e.target.dataset.tab) {
+      $('buyPopup').classList.add('hidden');
+      ui.switchTab(e.target.dataset.tab);
+    }
   });
 
   $('closeModal').addEventListener('click', () => $('modal').classList.add('hidden'));
