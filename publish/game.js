@@ -8,6 +8,9 @@
   function uid(prefix) { return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`; }
   function pick(list) { return list[Math.floor(Math.random() * list.length)]; }
   function money(n) { return Math.max(0, Math.floor(n)); }
+  function typeName(type) {
+    return ({ normal: '一般', fire: '火', water: '水', electric: '电', grass: '草', ice: '冰', fighting: '格斗', poison: '毒', ground: '地面', flying: '飞行', psychic: '超能', bug: '虫', rock: '岩石', ghost: '幽灵', dragon: '龙', dark: '恶', steel: '钢', fairy: '妖精' })[type] || type;
+  }
 
   function rollRarity(boost = 0) {
     const r = Math.random();
@@ -73,7 +76,7 @@
     const pack = state.packs.find((x) => x.id === id);
     if (!pack) return;
     const base = config.packTypes[pack.type];
-    ui.showModal('开包中...', '<div class="empty">正在从 PokeAPI 拉取卡片...</div>');
+    ui.showModal('开包中...', '<div class="empty">正在拆封卡包，卡牌能量正在显现...</div>');
     try {
       const cards = [];
       for (let i = 0; i < base.cards; i++) cards.push(await makeCard(base.rareBoost));
@@ -92,7 +95,7 @@
     const rarity = rollRarity(boost);
     const p = await pokeApi.getRandom(rarity.maxId);
     const shiny = Math.random() < 0.035 + boost / 4;
-    return { id: uid('card'), pokemonId: p.id, name: p.name, sprite: p.sprite, types: p.types, rarity, shiny, value: money((20 + p.stats / 8) * rarity.value * (shiny ? 3 : 1)) };
+    return { id: uid('card'), pokemonId: p.id, name: p.name, sprite: p.sprite, types: p.types.map(typeName), rarity, shiny, value: money((20 + p.stats / 8) * rarity.value * (shiny ? 3 : 1)) };
   }
 
   async function sellPack(id) {

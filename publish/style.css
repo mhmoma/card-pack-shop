@@ -195,11 +195,12 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 }
 .cards-grid.compact { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
 .poke-card { position: relative; overflow: hidden; min-height: 224px; }
-.poke-card img { width: 112px; height: 112px; object-fit: contain; }
-.poke-card.uncommon { border-color: #58b9ff; }
-.poke-card.rare { border-color: #a36cff; }
-.poke-card.epic { border-color: #ffd15f; }
-.poke-card.legendary { border-color: #ff7ce5; box-shadow: 0 0 18px rgba(255, 124, 229, .28); }
+.poke-card img { width: 112px; height: 112px; object-fit: contain; image-rendering: auto; }
+.poke-card.common { border-color: #9d8b6c; background: linear-gradient(160deg, #34291f, #120c11); }
+.poke-card.uncommon { border-color: #4eb3ff; background: linear-gradient(160deg, #17334c, #0e1019); box-shadow: inset 0 0 18px rgba(78, 179, 255, .18); }
+.poke-card.rare { border-color: #9d6cff; background: linear-gradient(160deg, #322052, #100d18); box-shadow: inset 0 0 20px rgba(157, 108, 255, .22); }
+.poke-card.epic { border-color: #ffd15f; background: linear-gradient(160deg, #5c3c12, #17100c); box-shadow: 0 0 16px rgba(255, 209, 95, .22), inset 0 0 20px rgba(255, 209, 95, .18); }
+.poke-card.legendary { border-color: #ff7ce5; background: linear-gradient(135deg, #40205a, #5b2b18 52%, #102b4e); box-shadow: 0 0 22px rgba(255, 124, 229, .36), inset 0 0 24px rgba(126, 217, 255, .2); }
 .poke-card.shiny::before {
   content: '';
   position: absolute;
@@ -212,11 +213,16 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
   top: 8px;
   left: 8px;
   padding: 3px 7px;
-  border: 1px solid rgba(229, 181, 92, .45);
+  border: 1px solid currentColor;
   font-size: 12px;
   background: rgba(0, 0, 0, .42);
   color: #fff2b6;
 }
+.poke-card.common .tag { color: #d6c5a4; }
+.poke-card.uncommon .tag { color: #6cc5ff; }
+.poke-card.rare .tag { color: #bd9cff; }
+.poke-card.epic .tag { color: #ffd15f; }
+.poke-card.legendary .tag { color: #ff9df0; }
 .row { display: flex; gap: 8px; margin-top: 8px; }
 .row button { flex: 1; }
 .empty {
