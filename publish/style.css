@@ -1,4 +1,6 @@
 * { box-sizing: border-box; }
+*::-webkit-scrollbar { width: 0; height: 0; }
+* { scrollbar-width: none; }
 html, body {
   margin: 0;
   height: 100vh;
@@ -392,6 +394,7 @@ h1 {
   width: min(760px, 96vw);
   max-height: 86dvh;
   overflow-y: auto;
+  scrollbar-width: none;
   padding: 20px;
   border: 1px solid #a77a3f;
   outline: 1px solid rgba(255, 221, 135, .14);
@@ -406,6 +409,8 @@ h1 {
   font-family: Georgia, 'Times New Roman', serif;
   letter-spacing: .08em;
 }
+.modal-card::-webkit-scrollbar { width: 0; height: 0; }
+.modal-card > .poke-card { width: 96px; display: inline-block; margin: 4px; vertical-align: top; }
 .close-btn { position: absolute; top: 10px; right: 10px; width: 44px; min-height: 34px; }
 .pack-opening {
   position: relative;
@@ -425,19 +430,15 @@ h1 {
   background: radial-gradient(circle, rgba(255, 241, 145, .45), rgba(148, 74, 255, .18) 42%, transparent 68%);
   animation: pulse-aura .9s ease-in-out infinite;
 }
-.pack-opening p {
-  position: absolute;
-  bottom: 18px;
-  color: #ffe7a3;
-  text-shadow: 0 0 10px #c77d21;
+.pack-opening p { position: absolute; bottom: 18px; color: #ffe7a3; text-shadow: 0 0 10px #c77d21; }
+.opening-pack-art {
+  position: absolute; z-index: 2; width: 92px; height: 118px; object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(255, 219, 110, .86));
+  animation: pack-awaken 1.05s ease-in-out infinite;
 }
 .magic-ring {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  border: 2px solid rgba(255, 213, 95, .9);
-  border-radius: 50%;
-  box-shadow: 0 0 32px #d9922f, inset 0 0 32px rgba(255, 223, 127, .42);
+  position: relative; width: 180px; height: 180px; border: 2px solid rgba(255, 213, 95, .9);
+  border-radius: 50%; box-shadow: 0 0 32px #d9922f, inset 0 0 32px rgba(255, 223, 127, .42);
   animation: ring-spin 1.2s linear infinite;
 }
 .magic-ring::before, .magic-ring::after {
@@ -476,6 +477,7 @@ h1 {
 .sparkles i:nth-child(5) { left: 50%; top: 18%; animation-delay: .48s; }
 .sparkles i:nth-child(6) { left: 52%; top: 66%; animation-delay: .6s; }
 @keyframes ring-spin { to { transform: rotate(360deg); } }
+@keyframes pack-awaken { 0%,100% { transform: translateY(0) scale(.96); } 50% { transform: translateY(-7px) scale(1.08); } }
 @keyframes card-burst { 0%,100% { transform: scale(.86) rotateY(0); } 50% { transform: scale(1.18) rotateY(180deg); } }
 @keyframes sparkle { 0%,100% { opacity: .2; transform: scale(.5) rotate(45deg); } 50% { opacity: 1; transform: scale(1.4) rotate(45deg); } }
 @keyframes pulse-aura { 0%,100% { opacity: .55; transform: scale(.82); } 50% { opacity: 1; transform: scale(1.18); } }
