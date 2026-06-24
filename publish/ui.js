@@ -69,11 +69,14 @@ window.CardShop.ui = (() => {
   }
 
   function cardHtml(card) {
-    const name = /[a-z]/i.test(card.name) ? '宝可梦卡牌' : card.name;
+    const data = window.CardShop.pokemonData.byId[card.pokemonId];
+    const name = data?.zh || card.name;
+    const types = data?.types || card.types;
+    const sprite = data?.sprite || card.sprite;
     return `<article class="poke-card ${card.rarity.key} ${card.shiny ? 'shiny' : ''}">
       <span class="tag">${card.rarity.name}${card.shiny ? ' 闪' : ''}</span>
-      <img src="${card.sprite}" alt="${name}" loading="lazy">
-      <h3>${name}</h3><p>${card.types.join(' / ')}</p>
+      <img src="${sprite}" alt="${name}" loading="lazy">
+      <h3>${name}</h3><p>${types.join(' / ')}</p>
       <strong>价值 ${priceFns.card(card)}</strong></article>`;
   }
 
