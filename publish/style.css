@@ -103,25 +103,33 @@ p { color: #e2cda5; font-size: 13px; }
 }
 .shelf-item {
   position: absolute;
-  width: 15%;
-  height: 23%;
+  width: 12%;
+  height: 21%;
   display: grid;
   place-items: center;
   transform: translate(-50%, -50%);
   transition: transform .16s, filter .16s;
 }
-.shelf-item:hover { transform: translate(-50%, -54%); filter: drop-shadow(0 12px 14px rgba(0, 0, 0, .42)); }
+.shelf-item:hover { transform: translate(-50%, -56%); filter: drop-shadow(0 12px 14px rgba(0, 0, 0, .42)); }
 .shelf-pack-img {
-  width: 72%;
-  height: 68%;
+  width: 82%;
+  height: 78%;
   object-fit: contain;
   filter: drop-shadow(0 12px 10px rgba(0, 0, 0, .55));
 }
+.pos-0 { left: 23%; top: 35%; }
+.pos-1 { left: 41%; top: 35%; }
+.pos-2 { left: 59%; top: 35%; }
+.pos-3 { left: 77%; top: 35%; }
+.pos-4 { left: 23%; top: 63%; }
+.pos-5 { left: 41%; top: 63%; }
+.pos-6 { left: 59%; top: 63%; }
+.pos-7 { left: 77%; top: 63%; }
 .shelf-price {
   position: absolute;
-  left: -18%;
-  right: -18%;
-  bottom: -8%;
+  left: -35%;
+  right: -35%;
+  bottom: -18%;
   display: grid;
   gap: 1px;
   text-align: center;
@@ -129,8 +137,28 @@ p { color: #e2cda5; font-size: 13px; }
   text-shadow: 0 2px 3px #2b1400;
   pointer-events: none;
 }
-.shelf-price b { font-size: clamp(11px, 1.5vw, 14px); }
-.shelf-price span { font-size: clamp(10px, 1.3vw, 12px); color: #ffd76f; }
+.shelf-price b { font-size: clamp(10px, 1.35vw, 13px); }
+.shelf-price span { font-size: clamp(9px, 1.2vw, 12px); color: #ffd76f; }
+.shelf-action {
+  position: absolute;
+  left: -22%;
+  right: -22%;
+  bottom: -44%;
+  display: grid;
+  place-items: center;
+}
+.shelf-action button, .shelf-action span {
+  min-height: 30px;
+  width: 100%;
+  border-radius: 999px;
+  font-size: 12px;
+}
+.shelf-action span {
+  display: grid;
+  place-items: center;
+  color: #d9c7a5;
+  background: rgba(0, 0, 0, .48);
+}
 .pack-card, .poke-card, .owned-pack, .market-item {
   border-radius: 18px;
   border: 1px solid rgba(255, 227, 145, .35);
@@ -143,21 +171,6 @@ p { color: #e2cda5; font-size: 13px; }
 .pack-art img { max-height: 122px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 12px 12px rgba(0,0,0,.45)); }
 .pack-card h3, .poke-card h3 { font-size: 15px; color: #fff3be; }
 .pack-card strong, .poke-card strong { display: block; margin-top: 6px; color: #ffd76f; }
-.buy-btn, .sold-label {
-  position: absolute;
-  left: 18%;
-  right: 18%;
-  bottom: 0;
-  z-index: 4;
-}
-.sold-label {
-  min-height: 44px;
-  display: grid;
-  place-items: center;
-  border-radius: 14px;
-  color: #d5c2a0;
-  background: rgba(0, 0, 0, .45);
-}
 .list-grid, .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -237,8 +250,9 @@ p { color: #e2cda5; font-size: 13px; }
 .close-btn { position: absolute; top: 10px; right: 10px; width: 44px; }
 @keyframes shine { to { transform: translateX(45%) rotate(12deg); } }
 @media (max-width: 760px) {
-  .shelf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .shelf-slot { min-height: 190px; }
+  .shelf-stage { width: 132%; margin-left: -16%; }
+  .shelf-item { width: 13%; }
+  .shelf-action { bottom: -50%; }
   .top-bar { align-items: flex-start; }
   .top-bar p { display: none; }
 }
