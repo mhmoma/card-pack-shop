@@ -84,7 +84,7 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
 .shelf-grid {
   position: absolute;
   left: 50%;
-  top: 42%;
+  top: 40%;
   width: min(69vw, calc(86vh * 1.55));
   transform: translate(-50%, -50%);
 }
@@ -263,5 +263,5 @@ h1 { font-size: clamp(24px, 5vw, 38px); text-shadow: 0 3px 2px #1c0c06; }
   .scene-timer { top: 12%; }
 }
 @media (min-aspect-ratio: 16/9) {
-  .shelf-grid { width: min(66vw, calc(84vh * 1.55)); top: 42%; }
+  .shelf-grid { width: min(66vw, calc(84vh * 1.55)); top: 40%; }
 }
