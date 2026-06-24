@@ -6,9 +6,27 @@
   <title>卡包商店</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="packs.css">
+  <link rel="stylesheet" href="start.css">
 </head>
 <body>
-  <div id="app" class="game-shell">
+  <div id="app" class="game-shell locked">
+    <section id="coverScreen" class="cover-screen">
+      <div class="cover-panel">
+        <img id="coverArt" class="cover-art" src="./assets/generated/cover-monster-card-shop.d668afa3.webp" alt="卡包商店封面">
+        <div class="cover-menu">
+          <h1>卡包商店</h1>
+          <p>选择卡槽，云端存档冷启动后进入商店。</p>
+          <div id="saveSlots" class="save-slots"></div>
+        </div>
+      </div>
+    </section>
+    <section id="loadingScreen" class="loading-screen hidden">
+      <div class="loading-box">
+        <h2>加载中</h2>
+        <p id="loadingText">准备中...</p>
+        <div class="progress-shell"><img src="./assets/generated/progress-gem-bar.260f2b42.webp" alt=""><span id="loadingFill"></span></div>
+      </div>
+    </section>
     <header class="top-bar">
       <div>
         <h1>卡包商店</h1>
@@ -17,6 +35,7 @@
       <div class="wallet">
         <strong id="gold">0</strong>
         <span>金币</span>
+        <button id="saveMenuBtn">存档</button>
       </div>
     </header>
 
@@ -86,6 +105,7 @@
   <script src="poke-api.js"></script>
   <script src="collection.js"></script>
   <script src="formulas.js"></script>
+  <script src="save-system.js"></script>
   <script src="ui.js"></script>
   <script src="game.js"></script>
 </body>

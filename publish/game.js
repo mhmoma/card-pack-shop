@@ -1,7 +1,7 @@
 (() => {
-  const { config, storage, pokeApi, ui, collection, formulas } = window.CardShop;
-  const key = 'card-shop-save-v1';
-  const state = { gold: 0, shop: [], packs: [], cards: [], marketMood: null, nextRefresh: 0, tab: 'shop', collectionFilter: null };
+  const { config, pokeApi, ui, collection, formulas, saveSystem } = window.CardShop;
+  const fresh = () => ({ gold: config.initialGold, shop: [], packs: [], cards: [], marketMood: null, nextRefresh: 0, tab: 'shop', collectionFilter: null });
+  const state = fresh();
   let selectedPackId = null;
   let selectedOwnedPackId = null;
   const $ = (id) => document.getElementById(id);
@@ -29,10 +29,11 @@
     return formulas.packMarketValue(base, pack.price, state.marketMood.rate);
   }
   function marketCardPrice(card) { return money(card.value * state.marketMood.rate); }
-  async function save() { await storage.put(key, state); }
-  async function load() {
-    const saved = await storage.get(key);
-    Object.assign(state, saved || { gold: config.initialGold });
+  async function save() { await saveSystem.save(state); }
+  async function startGame(slot) {
+    ui.showLoading(5, '准备进入卡槽...');
+    const saved = await saveSystem.prepare(slot, ui.showLoading);
+    Object.assign(state, fresh(), saved || {});
     if (!state.nextRefresh || Date.now() >= state.nextRefresh || state.shop.length < 12) makeShop();
     if (!state.marketMood) state.marketMood = pick(config.marketMoods);
     collection.tagPokemonData(); collection.tagCards(state.cards);
@@ -41,7 +42,8 @@
     await normalizeOldCards();
     ui.renderAll(state);
     ui.switchTab(state.tab || 'shop');
-    setInterval(tick, 1000);
+    ui.enterGame();
+    if (!window.CardShop.tickTimer) window.CardShop.tickTimer = setInterval(tick, 1000);
     await save();
   }
   function tick() {
@@ -179,5 +181,16 @@
     $('buyPopup').classList.add('hidden');
     selectedPackId = null;
   });
-  load();
+  $('saveMenuBtn').addEventListener('click', async () => {
+    ui.showCover();
+    ui.renderSlots(await saveSystem.slotMetas());
+  });
+  document.addEventListener('click', async (e) => {
+    const start = e.target.closest('[data-start-slot]');
+    if (start) startGame(start.dataset.startSlot);
+    const saveTo = e.target.closest('[data-save-slot]');
+    if (saveTo) { await saveSystem.saveTo(saveTo.dataset.saveSlot, state); ui.renderSlots(await saveSystem.slotMetas()); }
+  });
+  saveSystem.slotMetas().then(ui.renderSlots);
+  ui.showCover();
 })();

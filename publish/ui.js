@@ -114,5 +114,31 @@ window.CardShop.ui = (() => {
     document.body.classList.toggle('shop-active', tab === 'shop');
   }
 
-  return { setup, renderAll, renderRefreshText, cardHtml, showModal, switchTab };
+  function renderSlots(slots) {
+    $('saveSlots').innerHTML = slots.map((slot) => `<div class="save-slot">
+      <b>卡槽 ${slot.slot}</b><span>${slot.hasData ? `${slot.cards} 卡 · ${slot.packs} 包 · ${slot.gold} 金币` : '空卡槽'}</span>
+      <div><button data-start-slot="${slot.slot}">${slot.hasData ? '读取' : '新游戏'}</button><button data-save-slot="${slot.slot}">存入</button></div>
+    </div>`).join('');
+  }
+
+  function showCover() {
+    $('coverScreen').classList.remove('hidden');
+    $('loadingScreen').classList.add('hidden');
+    $('app').classList.add('locked');
+  }
+
+  function showLoading(progress, text) {
+    $('coverScreen').classList.add('hidden');
+    $('loadingScreen').classList.remove('hidden');
+    $('loadingText').textContent = text;
+    $('loadingFill').style.width = `${Math.min(100, progress)}%`;
+  }
+
+  function enterGame() {
+    $('coverScreen').classList.add('hidden');
+    $('loadingScreen').classList.add('hidden');
+    $('app').classList.remove('locked');
+  }
+
+  return { setup, renderAll, renderRefreshText, cardHtml, showModal, switchTab, renderSlots, showCover, showLoading, enterGame };
 })();

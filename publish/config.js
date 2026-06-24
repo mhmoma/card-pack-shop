@@ -16,6 +16,8 @@ window.CardShop.config = {
     cardBgEpic: './assets/generated/card-template-epic.7fda81b7.webp',
     cardBgLegendary: './assets/generated/card-template-legendary.49989cb4.webp',
     cardBgShiny: './assets/generated/card-template-shiny.e2de9b15.webp',
+    cover: './assets/generated/cover-monster-card-shop.d668afa3.webp',
+    progressBar: './assets/generated/progress-gem-bar.260f2b42.webp',
   },
   packTypes: {
     common: { name: '普通卡包', cards: 3, image: 'commonPack', rareBoost: 0, shinyBonus: 0, market: 0.75, spawnWeight: 58 },
