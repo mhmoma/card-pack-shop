@@ -1,0 +1,42 @@
+.pack-popup {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  z-index: 14;
+  width: 220px;
+  padding: 12px;
+  transform: translateX(-50%);
+  border: 1px solid #a4773e;
+  outline: 1px solid rgba(255, 220, 130, .16);
+  background: linear-gradient(180deg, rgba(43, 24, 17, .96), rgba(12, 8, 12, .96));
+  box-shadow: inset 0 0 18px rgba(194, 126, 45, .12), 0 14px 28px rgba(0, 0, 0, .55);
+  text-align: center;
+}
+.pack-inventory {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(94px, 1fr));
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.pack-token {
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  min-height: 128px;
+  padding: 8px 6px;
+  border: 1px solid rgba(151, 103, 48, .36);
+  background: radial-gradient(circle at 50% 32%, rgba(195, 129, 49, .18), transparent 58%), rgba(16, 10, 12, .48);
+}
+.pack-token img {
+  width: 70px;
+  height: 88px;
+  object-fit: contain;
+  filter: drop-shadow(0 9px 8px rgba(0,0,0,.55));
+}
+.pack-token span {
+  color: #f4d891;
+  font-size: 12px;
+  font-weight: 800;
+  text-shadow: 0 2px 3px #080406;
+}

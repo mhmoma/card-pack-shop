@@ -31,10 +31,7 @@ window.CardShop.ui = (() => {
   }
 
   function renderPacks(state) {
-    $('packsList').innerHTML = state.packs.length ? state.packs.map((pack) =>
-      `<div class="owned-pack">${packCard(pack, true)}
-      <div class="row"><button data-open="${pack.id}">打开</button><button data-sell-pack="${pack.id}">出售</button></div></div>`
-    ).join('') : '<div class="empty">暂无卡包，去商店买一个吧。</div>';
+    $('packsList').innerHTML = state.packs.length ? state.packs.map(packIcon).join('') : '<div class="empty">暂无卡包，去商店买一个吧。</div>';
   }
 
   function renderCards(state) {
@@ -67,6 +64,15 @@ window.CardShop.ui = (() => {
     return `<div class="shelf-item pos-${index} ${slot.sold ? 'sold' : ''}" ${slot.sold ? '' : `data-preview-buy="${slot.id}"`}>
       <img class="shelf-pack-img" src="${img}" alt="${pack.name}">
     </div>`;
+  }
+
+  function packIcon(slot) {
+    const pack = config.packTypes[slot.type];
+    const img = config.assets[pack.image];
+    return `<button class="pack-token" data-pack-preview="${slot.id}">
+      <img src="${img}" alt="${pack.name}">
+      <span>${pack.name}</span>
+    </button>`;
   }
 
   function packCard(slot, owned) {

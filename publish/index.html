@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content, user-scalable=no">
   <title>卡包商店</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="packs.css">
 </head>
 <body>
   <div id="app" class="game-shell">
@@ -36,7 +37,13 @@
           <h2>未开卡包</h2>
           <p>打开卡包获得随机宝可梦卡片，也可卖给市场。</p>
         </div>
-        <div id="packsList" class="list-grid"></div>
+        <div id="packsList" class="pack-inventory"></div>
+        <div id="packPopup" class="pack-popup hidden">
+          <button id="closePackPopup" class="popup-close">×</button>
+          <div id="packPopupName" class="popup-name">卡包</div>
+          <div id="packPopupInfo" class="popup-price">0 金币</div>
+          <div class="row"><button id="openSelectedPack">开启</button><button id="sellSelectedPack">出售</button></div>
+        </div>
       </section>
 
       <section id="collectionView" class="panel hidden">
