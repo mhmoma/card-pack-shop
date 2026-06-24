@@ -47,7 +47,8 @@
     Object.assign(state, saved || { gold: config.initialGold });
     if (!state.nextRefresh || Date.now() >= state.nextRefresh || state.shop.length < 12) makeShop();
     if (!state.marketMood) state.marketMood = pick(config.marketMoods);
-    if (!state.collectionFilter) state.collectionFilter = collection.defaultFilter();
+    collection.tagPokemonData();
+    state.collectionFilter = collection.normalizeFilter(state.collectionFilter || collection.defaultFilter());
     ui.setup({ pack: marketPackPrice, card: marketCardPrice });
     await normalizeOldCards();
     ui.renderAll(state);
@@ -158,8 +159,10 @@
     if (e.target.dataset.open) openPack(e.target.dataset.open);
     if (e.target.dataset.sellPack) sellPack(e.target.dataset.sellPack);
     if (e.target.dataset.sellCard) sellCard(e.target.dataset.sellCard);
-    if (e.target.dataset.filterType) {
-      state.collectionFilter[e.target.dataset.filterType] = e.target.dataset.filterValue;
+    const filterBtn = e.target.closest('[data-filter-type]');
+    if (filterBtn) {
+      state.collectionFilter = collection.normalizeFilter(state.collectionFilter || collection.defaultFilter());
+      state.collectionFilter[filterBtn.dataset.filterType] = filterBtn.dataset.filterValue;
       ui.renderAll(state);
       save();
     }

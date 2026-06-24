@@ -2,28 +2,28 @@ window.CardShop = window.CardShop || {};
 
 window.CardShop.collection = (() => {
   const regions = [
-    { key: 'all', name: '全部地区', gen: 'all', min: 1, max: 1025 },
-    { key: 'kanto', name: '关都', gen: 'gen1', min: 1, max: 151 },
-    { key: 'johto', name: '城都', gen: 'gen2', min: 152, max: 251 },
-    { key: 'hoenn', name: '丰缘', gen: 'gen3', min: 252, max: 386 },
-    { key: 'sinnoh', name: '神奥', gen: 'gen4', min: 387, max: 493 },
-    { key: 'unova', name: '合众', gen: 'gen5', min: 494, max: 649 },
-    { key: 'kalos', name: '卡洛斯', gen: 'gen6', min: 650, max: 721 },
-    { key: 'alola', name: '阿罗拉', gen: 'gen7', min: 722, max: 809 },
-    { key: 'galar', name: '伽勒尔', gen: 'gen8', min: 810, max: 905 },
-    { key: 'paldea', name: '帕底亚', gen: 'gen9', min: 906, max: 1025 },
+    { key: 'all', name: '全部地区', min: 1, max: 1025 },
+    { key: '1', name: '关都', min: 1, max: 151 },
+    { key: '2', name: '城都', min: 152, max: 251 },
+    { key: '3', name: '丰缘', min: 252, max: 386 },
+    { key: '4', name: '神奥', min: 387, max: 493 },
+    { key: '5', name: '合众', min: 494, max: 649 },
+    { key: '6', name: '卡洛斯', min: 650, max: 721 },
+    { key: '7', name: '阿罗拉', min: 722, max: 809 },
+    { key: '8', name: '伽勒尔', min: 810, max: 905 },
+    { key: '9', name: '帕底亚', min: 906, max: 1025 },
   ];
   const generations = [
     { key: 'all', name: '全部世代' },
-    { key: 'gen1', name: '一世代' },
-    { key: 'gen2', name: '二世代' },
-    { key: 'gen3', name: '三世代' },
-    { key: 'gen4', name: '四世代' },
-    { key: 'gen5', name: '五世代' },
-    { key: 'gen6', name: '六世代' },
-    { key: 'gen7', name: '七世代' },
-    { key: 'gen8', name: '八世代' },
-    { key: 'gen9', name: '九世代' },
+    { key: '1', name: '一世代' },
+    { key: '2', name: '二世代' },
+    { key: '3', name: '三世代' },
+    { key: '4', name: '四世代' },
+    { key: '5', name: '五世代' },
+    { key: '6', name: '六世代' },
+    { key: '7', name: '七世代' },
+    { key: '8', name: '八世代' },
+    { key: '9', name: '九世代' },
   ];
   const qualities = [
     { key: 'all', name: '全部品质' },
@@ -35,15 +35,36 @@ window.CardShop.collection = (() => {
     { key: 'common', name: '普通' },
   ];
   const rank = { legendary: 5, epic: 4, rare: 3, uncommon: 2, common: 1 };
+  const legacy = { kanto: '1', johto: '2', hoenn: '3', sinnoh: '4', unova: '5', kalos: '6', alola: '7', galar: '8', paldea: '9', gen1: '1', gen2: '2', gen3: '3', gen4: '4', gen5: '5', gen6: '6', gen7: '7', gen8: '8', gen9: '9' };
 
   function defaultFilter() { return { region: 'all', generation: 'all', quality: 'all' }; }
   function regionOf(id) { return regions.find((r) => id >= r.min && id <= r.max) || regions[0]; }
   function uniqueCount(cards) { return new Set(cards.map((c) => c.pokemonId)).size; }
+  function normalizeValue(value) { return legacy[value] || value || 'all'; }
+  function normalizeFilter(filter) {
+    return { region: normalizeValue(filter?.region), generation: normalizeValue(filter?.generation), quality: filter?.quality || 'all' };
+  }
 
-  function match(card, filter) {
-    const region = regionOf(card.pokemonId);
-    if (filter.region !== 'all' && region.key !== filter.region) return false;
-    if (filter.generation !== 'all' && region.gen !== filter.generation) return false;
+  function tagPokemonData() {
+    const data = window.CardShop.pokemonData;
+    if (!data || data.tagged) return;
+    data.sortedByTotal.forEach((pokemon) => {
+      const region = regionOf(pokemon.id);
+      pokemon.regionTag = region.key;
+      pokemon.generationTag = region.key;
+      if (data.byId[pokemon.id]) {
+        data.byId[pokemon.id].regionTag = region.key;
+        data.byId[pokemon.id].generationTag = region.key;
+      }
+    });
+    data.tagged = true;
+  }
+
+  function match(card, rawFilter) {
+    const filter = normalizeFilter(rawFilter);
+    const data = window.CardShop.pokemonData.byId[card.pokemonId];
+    if (filter.region !== 'all' && data?.regionTag !== filter.region) return false;
+    if (filter.generation !== 'all' && data?.generationTag !== filter.generation) return false;
     if (filter.quality === 'shiny') return card.shiny;
     if (filter.quality !== 'all' && card.rarity.key !== filter.quality) return false;
     return true;
@@ -59,9 +80,10 @@ window.CardShop.collection = (() => {
     });
   }
 
-  function filterCards(cards, filter) { return sorted(cards.filter((card) => match(card, filter))); }
+  function filterCards(cards, filter) { tagPokemonData(); return sorted(cards.filter((card) => match(card, filter))); }
 
-  function stats(allCards, shownCards, filter) {
+  function stats(allCards, shownCards, rawFilter) {
+    const filter = normalizeFilter(rawFilter);
     const shiny = shownCards.filter((card) => card.shiny).length;
     const total = `${allCards.length} 张 / ${uniqueCount(allCards)} 种`;
     const shown = `${shownCards.length} 张 / ${uniqueCount(shownCards)} 种`;
@@ -69,5 +91,5 @@ window.CardShop.collection = (() => {
     return active ? `当前 ${shown} · 总收藏 ${total} · 闪光 ${shiny} 张` : `已收藏 ${total} · 闪光 ${shiny} 张`;
   }
 
-  return { regions, generations, qualities, defaultFilter, filterCards, stats };
+  return { regions, generations, qualities, defaultFilter, normalizeFilter, filterCards, stats, tagPokemonData };
 })();

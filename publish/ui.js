@@ -38,7 +38,7 @@ window.CardShop.ui = (() => {
   }
 
   function renderCards(state) {
-    const filter = state.collectionFilter || collection.defaultFilter();
+    const filter = collection.normalizeFilter(state.collectionFilter || collection.defaultFilter());
     const shown = collection.filterCards(state.cards, filter);
     $('collectionInfo').textContent = collection.stats(state.cards, shown, filter);
     $('collectionFilters').innerHTML = filterGroup('region', collection.regions, filter.region)
