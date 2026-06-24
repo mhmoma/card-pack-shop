@@ -18,11 +18,11 @@ window.CardShop.config = {
     cardBgShiny: './assets/generated/card-template-shiny.e2de9b15.webp',
   },
   packTypes: {
-    common: { name: '普通卡包', price: 100, cards: 3, image: 'commonPack', rareBoost: 0, market: 0.75 },
-    type: { name: '属性卡包', price: 180, cards: 3, image: 'commonPack', rareBoost: 0.08, market: 0.82 },
-    premium: { name: '高级卡包', price: 350, cards: 5, image: 'premiumPack', rareBoost: 0.16, market: 0.9 },
-    shiny: { name: '闪光卡包', price: 600, cards: 5, image: 'premiumPack', rareBoost: 0.24, market: 1.05 },
-    mystery: { name: '神秘卡包', price: 420, cards: 4, image: 'mysteryPack', rareBoost: 0.18, market: 1.15 },
+    common: { name: '普通卡包', price: 100, cards: 3, image: 'commonPack', rareBoost: 0, market: 0.75, spawnWeight: 58 },
+    type: { name: '属性卡包', price: 180, cards: 3, image: 'commonPack', rareBoost: 0.08, market: 0.82, spawnWeight: 22 },
+    premium: { name: '高级卡包', price: 350, cards: 5, image: 'premiumPack', rareBoost: 0.16, market: 0.9, spawnWeight: 13 },
+    shiny: { name: '闪光卡包', price: 600, cards: 5, image: 'premiumPack', rareBoost: 0.24, market: 1.05, spawnWeight: 2 },
+    mystery: { name: '神秘卡包', price: 420, cards: 4, image: 'mysteryPack', rareBoost: 0.18, market: 1.15, spawnWeight: 5 },
   },
   rarities: [
     { key: 'legendary', name: '传说', minTotal: 580, value: 7.5, shinyChance: 0.006 },
