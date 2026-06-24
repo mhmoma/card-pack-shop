@@ -35,47 +35,33 @@ window.CardShop.collection = (() => {
     { key: 'common', name: '普通' },
   ];
   const rank = { legendary: 5, epic: 4, rare: 3, uncommon: 2, common: 1 };
-  const tagVersion = 'region-generation-v2';
   const legacy = { kanto: '1', johto: '2', hoenn: '3', sinnoh: '4', unova: '5', kalos: '6', alola: '7', galar: '8', paldea: '9', gen1: '1', gen2: '2', gen3: '3', gen4: '4', gen5: '5', gen6: '6', gen7: '7', gen8: '8', gen9: '9' };
 
   function defaultFilter() { return { region: 'all', generation: 'all', quality: 'all' }; }
-  function regionOf(id) { return regions.find((r) => id >= r.min && id <= r.max) || regions[0]; }
-  function uniqueCount(cards) { return new Set(cards.map((c) => c.pokemonId)).size; }
   function normalizeValue(value) { return legacy[value] || value || 'all'; }
   function normalizeFilter(filter) {
     return { region: normalizeValue(filter?.region), generation: normalizeValue(filter?.generation), quality: filter?.quality || 'all' };
   }
-
-  function tagPokemonData() {
-    const data = window.CardShop.pokemonData;
-    if (!data || data.tagVersion === tagVersion) return;
-    data.sortedByTotal.forEach((pokemon) => {
-      const region = regionOf(Number(pokemon.id));
-      pokemon.regionTag = region.key;
-      pokemon.generationTag = region.key;
-      if (data.byId[pokemon.id]) {
-        data.byId[pokemon.id].regionTag = region.key;
-        data.byId[pokemon.id].generationTag = region.key;
-      }
-    });
-    data.tagVersion = tagVersion;
+  function tagOf(id) {
+    const num = Number(id);
+    const region = regions.find((item) => num >= item.min && num <= item.max);
+    return region?.key || 'all';
   }
-
+  function uniqueCount(cards) { return new Set(cards.map((card) => card.pokemonId)).size; }
+  function tagPokemonData() {}
   function tagCard(card) {
-    const data = window.CardShop.pokemonData.byId[card.pokemonId];
-    const region = data?.regionTag || regionOf(Number(card.pokemonId)).key;
-    card.regionTag = region;
-    card.generationTag = region;
+    const tag = tagOf(card.pokemonId);
+    card.regionTag = tag;
+    card.generationTag = tag;
     return card;
   }
-
-  function tagCards(cards) { tagPokemonData(); cards.forEach(tagCard); return cards; }
+  function tagCards(cards) { cards.forEach(tagCard); return cards; }
 
   function match(card, rawFilter) {
     const filter = normalizeFilter(rawFilter);
-    tagCard(card);
-    if (filter.region !== 'all' && card.regionTag !== filter.region) return false;
-    if (filter.generation !== 'all' && card.generationTag !== filter.generation) return false;
+    const tag = tagOf(card.pokemonId);
+    if (filter.region !== 'all' && tag !== filter.region) return false;
+    if (filter.generation !== 'all' && tag !== filter.generation) return false;
     if (filter.quality === 'shiny') return card.shiny;
     if (filter.quality !== 'all' && card.rarity.key !== filter.quality) return false;
     return true;
@@ -90,9 +76,7 @@ window.CardShop.collection = (() => {
       return a.pokemonId - b.pokemonId;
     });
   }
-
-  function filterCards(cards, filter) { return sorted(tagCards(cards).filter((card) => match(card, filter))); }
-
+  function filterCards(cards, filter) { return sorted(cards.filter((card) => match(card, filter))); }
   function stats(allCards, shownCards, rawFilter) {
     const filter = normalizeFilter(rawFilter);
     const shiny = shownCards.filter((card) => card.shiny).length;

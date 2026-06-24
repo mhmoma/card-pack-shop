@@ -168,6 +168,7 @@
       state.collectionFilter[filterBtn.dataset.filterType] = filterBtn.dataset.filterValue;
       ui.renderAll(state);
       save();
+      return;
     }
     if (e.target.dataset.tab) {
       $('buyPopup').classList.add('hidden');
