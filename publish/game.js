@@ -82,7 +82,7 @@
       state.packs = state.packs.filter((x) => x.id !== id);
       await save();
       ui.renderAll(state);
-      ui.showModal('开包结果', cards.map(ui.cardHtml).join(''));
+      ui.showModal('开包结果', `<div class="opening-results">${cards.map(ui.cardHtml).join('')}</div>`);
     } catch (err) {
       console.error('open pack failed:', err.message, err.stack);
       ui.showModal('开包失败', '<div class="empty">网络异常，请稍后再试。卡包没有被消耗。</div>');
