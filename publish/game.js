@@ -19,6 +19,10 @@
     return money(base * rarity.value * shinyRate * variance);
   }
 
+  function shinySprite(id) {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`;
+  }
+
   function makeShop() {
     const types = Object.keys(config.packTypes);
     state.marketMood = pick(config.marketMoods);
@@ -96,7 +100,7 @@
     const rarity = rarityByTotal(p.stats);
     const boost = config.packTypes[packType]?.rareBoost || 0;
     const shiny = Math.random() < rarity.shinyChance + boost * 0.04;
-    return { id: uid('card'), pokemonId: p.id, name: p.name, sprite: p.sprite, types: p.types, rarity, shiny, value: cardValue(p.stats, rarity, shiny) };
+    return { id: uid('card'), pokemonId: p.id, name: p.name, sprite: shiny ? shinySprite(p.id) : p.sprite, types: p.types, rarity, shiny, value: cardValue(p.stats, rarity, shiny) };
   }
 
   async function normalizeOldCards() {
@@ -106,7 +110,7 @@
       const rarity = rarityByTotal(p.stats);
       if (card.name !== p.name || card.rarity?.key !== rarity.key) changed = true;
       card.name = p.name;
-      card.sprite = p.sprite || card.sprite;
+      card.sprite = card.shiny ? shinySprite(p.id) : (p.sprite || card.sprite);
       card.types = p.types;
       card.rarity = rarity;
       card.value = cardValue(p.stats, rarity, card.shiny);
