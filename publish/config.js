@@ -19,11 +19,11 @@ window.CardShop.config = {
     mystery: { name: '神秘卡包', price: 420, cards: 4, image: 'mysteryPack', rareBoost: 0.18, market: 1.15 },
   },
   rarities: [
-    { key: 'common', name: '普通', chance: 0.6, value: 1, maxId: 600 },
-    { key: 'uncommon', name: '优秀', chance: 0.25, value: 1.7, maxId: 850 },
-    { key: 'rare', name: '稀有', chance: 0.1, value: 3.2, maxId: 950 },
-    { key: 'epic', name: '史诗', chance: 0.04, value: 6, maxId: 1010 },
-    { key: 'legendary', name: '传说', chance: 0.01, value: 12, maxId: 1025 },
+    { key: 'legendary', name: '传说', minTotal: 580, value: 7.5, shinyChance: 0.006 },
+    { key: 'epic', name: '史诗', minTotal: 530, value: 3.8, shinyChance: 0.012 },
+    { key: 'rare', name: '稀有', minTotal: 450, value: 2.25, shinyChance: 0.02 },
+    { key: 'uncommon', name: '优秀', minTotal: 330, value: 1.45, shinyChance: 0.03 },
+    { key: 'common', name: '普通', minTotal: 0, value: 1, shinyChance: 0.04 },
   ],
   marketMoods: [
     { name: '低迷', rate: 0.72 },

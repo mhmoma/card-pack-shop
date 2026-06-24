@@ -8,19 +8,15 @@
   function uid(prefix) { return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`; }
   function pick(list) { return list[Math.floor(Math.random() * list.length)]; }
   function money(n) { return Math.max(0, Math.floor(n)); }
-  function typeName(type) {
-    return ({ normal: '一般', fire: '火', water: '水', electric: '电', grass: '草', ice: '冰', fighting: '格斗', poison: '毒', ground: '地面', flying: '飞行', psychic: '超能', bug: '虫', rock: '岩石', ghost: '幽灵', dragon: '龙', dark: '恶', steel: '钢', fairy: '妖精' })[type] || type;
+  function rarityByTotal(total) {
+    return config.rarities.find((rarity) => total >= rarity.minTotal) || config.rarities[config.rarities.length - 1];
   }
 
-  function rollRarity(boost = 0) {
-    const r = Math.random();
-    let acc = 0;
-    for (const rarity of config.rarities) {
-      const bonus = ['rare', 'epic', 'legendary'].includes(rarity.key) ? boost : -boost / 3;
-      acc += Math.max(0.01, rarity.chance + bonus);
-      if (r <= acc) return rarity;
-    }
-    return config.rarities[0];
+  function cardValue(total, rarity, shiny) {
+    const base = 12 + Math.pow(total / 100, 2.15) * 8;
+    const shinyRate = shiny ? 3.5 : 1;
+    const variance = 0.92 + Math.random() * 0.2;
+    return money(base * rarity.value * shinyRate * variance);
   }
 
   function makeShop() {
@@ -48,7 +44,7 @@
     if (!state.nextRefresh || Date.now() >= state.nextRefresh || state.shop.length < 12) makeShop();
     if (!state.marketMood) state.marketMood = pick(config.marketMoods);
     ui.setup({ pack: marketPackPrice, card: marketCardPrice });
-    await localizeOldCards();
+    await normalizeOldCards();
     ui.renderAll(state);
     setInterval(tick, 1000);
     await save();
@@ -80,7 +76,7 @@
     ui.showModal('开包中...', '<div class="pack-opening"><div class="magic-ring"></div><div class="burst-card"></div><div class="sparkles"><i></i><i></i><i></i><i></i><i></i><i></i></div><p>封印正在解除，稀有卡牌即将显现...</p></div>');
     try {
       const cards = [];
-      for (let i = 0; i < base.cards; i++) cards.push(await makeCard(base.rareBoost));
+      for (let i = 0; i < base.cards; i++) cards.push(await makeCard(pack.type));
       state.cards.push(...cards);
       state.packs = state.packs.filter((x) => x.id !== id);
       await save();
@@ -92,23 +88,27 @@
     }
   }
 
-  async function makeCard(boost) {
-    const rarity = rollRarity(boost);
-    const p = await pokeApi.getRandom(rarity.maxId);
-    const shiny = Math.random() < 0.035 + boost / 4;
-    return { id: uid('card'), pokemonId: p.id, name: p.name, sprite: p.sprite, types: p.types, rarity, shiny, value: money((20 + p.stats / 8) * rarity.value * (shiny ? 3 : 1)) };
+  async function makeCard(packType) {
+    const p = await pokeApi.getRandomByPack(packType);
+    const rarity = rarityByTotal(p.stats);
+    const boost = config.packTypes[packType]?.rareBoost || 0;
+    const shiny = Math.random() < rarity.shinyChance + boost * 0.04;
+    return { id: uid('card'), pokemonId: p.id, name: p.name, sprite: p.sprite, types: p.types, rarity, shiny, value: cardValue(p.stats, rarity, shiny) };
   }
 
-  async function localizeOldCards() {
-    const oldCards = state.cards.filter((c) => /[a-z]/i.test(c.name));
-    if (!oldCards.length) return;
-    for (const card of oldCards) {
+  async function normalizeOldCards() {
+    let changed = false;
+    for (const card of state.cards) {
       const p = await pokeApi.getPokemon(card.pokemonId);
+      const rarity = rarityByTotal(p.stats);
+      if (card.name !== p.name || card.rarity?.key !== rarity.key) changed = true;
       card.name = p.name;
       card.sprite = p.sprite || card.sprite;
       card.types = p.types;
+      card.rarity = rarity;
+      card.value = cardValue(p.stats, rarity, card.shiny);
     }
-    await save();
+    if (changed) await save();
   }
 
   async function sellPack(id) {
