@@ -3,11 +3,17 @@ window.CardShop.tradeMarket = (() => {
   const { pokemonData, config } = window.CardShop;
   let page = 0;
   let loading = false;
+  let playerName = '';
 
   function available() { return !!window.dzmm?.fn?.invoke; }
   async function invoke(method, args = {}) {
     if (!available()) throw new Error('交易所需要在游戏环境中使用');
     return window.dzmm.fn.invoke('trade-market', { method, ...args });
+  }
+  async function currentName() {
+    if (playerName) return playerName;
+    try { const info = await window.dzmm?.user?.info?.(); playerName = info?.name || info?.nickname || info?.username || ''; } catch (_) {}
+    return playerName;
   }
 
   function cardFromMarket(item) {
@@ -34,7 +40,7 @@ window.CardShop.tradeMarket = (() => {
     if (loading) return;
     loading = true;
     try {
-      const res = await invoke('list', { page });
+      const res = await invoke('list', { page, sellerName: await currentName() });
       const html = res.items.length ? res.items.map((x) => listingHtml(x, cardHtml)).join('') : '<div class="empty">交易所暂无上架卡片。</div>';
       const box = document.getElementById('tradeList');
       box.innerHTML = append ? box.innerHTML + html : html;
@@ -46,7 +52,7 @@ window.CardShop.tradeMarket = (() => {
   }
 
   async function refresh(cardHtml) { page = 0; await list(cardHtml, false); }
-  async function create(card, price) { return invoke('create', { card: { pokemonId: card.pokemonId, shiny: card.shiny, rarityKey: card.rarity.key, price } }); }
+  async function create(card, price) { return invoke('create', { sellerName: await currentName(), card: { pokemonId: card.pokemonId, shiny: card.shiny, rarityKey: card.rarity.key, price } }); }
   async function buy(code) { return invoke('buy', { code }); }
   async function claim() { return available() ? invoke('claim') : { gold: 0, sold: [] }; }
 
