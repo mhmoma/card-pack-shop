@@ -71,7 +71,7 @@
     const pack = state.packs.find((x) => x.id === id);
     if (!pack) return;
     const base = config.packTypes[pack.type];
-    ui.showModal('开包中...', `<div class="pack-opening"><img class="opening-pack-art" src="${config.assets[base.image]}" alt="${base.name}"><div class="magic-ring"></div><div class="burst-card"></div><div class="sparkles"><i></i><i></i><i></i><i></i><i></i><i></i></div><p>封印正在解除，稀有卡牌即将显现...</p></div>`);
+    ui.showModal('开包中...', `<div class="pack-opening"><img class="opening-pack-art" src="${config.assets[base.image]}" alt="${base.name}"><div class="soft-sparkles"><i></i><i></i><i></i><i></i><i></i><i></i></div><p>封印正在解除，稀有卡牌即将显现...</p></div>`);
     try {
       const startedAt = Date.now();
       const cards = [];
