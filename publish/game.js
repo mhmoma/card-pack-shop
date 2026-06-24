@@ -1,5 +1,5 @@
 (() => {
-  const { config, storage, pokeApi, ui, collection } = window.CardShop;
+  const { config, storage, pokeApi, ui, collection, formulas } = window.CardShop;
   const key = 'card-shop-save-v1';
   const state = { gold: 0, shop: [], packs: [], cards: [], marketMood: null, nextRefresh: 0, tab: 'shop', collectionFilter: null };
   let selectedPackId = null;
@@ -11,37 +11,22 @@
   function rarityByTotal(total) {
     return config.rarities.find((rarity) => total >= rarity.minTotal) || config.rarities[config.rarities.length - 1];
   }
-  function cardValue(total, rarity, shiny) {
-    const base = 12 + Math.pow(total / 100, 2.15) * 8;
-    const variance = 0.92 + Math.random() * 0.2;
-    return shiny ? shinyCardValue(base, rarity, variance) : money(base * rarity.value * variance);
-  }
-  function shinyCardValue(base, rarity, variance) {
-    const rarityPremium = { common: 8, uncommon: 9.5, rare: 11, epic: 13, legendary: 16 }[rarity.key] || 9;
-    return money((base * rarity.value * rarityPremium + 320) * variance);
-  }
-  function weightedPackType() {
-    const entries = Object.entries(config.packTypes);
-    const total = entries.reduce((sum, [, pack]) => sum + pack.spawnWeight, 0);
-    let roll = Math.random() * total;
-    for (const [type, pack] of entries) { roll -= pack.spawnWeight; if (roll <= 0) return type; }
-    return 'common';
-  }
+  function cardValue(total, rarity, shiny) { return formulas.cardValue(total, rarity, shiny); }
   function shinySprite(id) {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`;
   }
   function makeShop() {
     state.marketMood = pick(config.marketMoods);
     state.shop = Array.from({ length: 12 }, (_, i) => {
-      const type = weightedPackType();
+      const type = formulas.weightedPackType(config.packTypes);
       const base = config.packTypes[type];
-      return { id: uid('slot'), type, price: money(base.price * (0.85 + Math.random() * 0.35)), sold: false, hot: i === 0 && Math.random() < 0.5 };
+      return { id: uid('slot'), type, price: formulas.packShopPrice(base), sold: false, hot: i === 0 && Math.random() < 0.5 };
     });
     state.nextRefresh = Date.now() + config.refreshMs;
   }
   function marketPackPrice(pack) {
     const base = config.packTypes[pack.type];
-    return money((pack.price || base.price) * base.market * state.marketMood.rate);
+    return formulas.packMarketValue(base, pack.price, state.marketMood.rate);
   }
   function marketCardPrice(card) { return money(card.value * state.marketMood.rate); }
   async function save() { await storage.put(key, state); }
@@ -100,8 +85,8 @@
   async function makeCard(packType) {
     const p = await pokeApi.getRandomByPack(packType);
     const rarity = rarityByTotal(p.stats);
-    const boost = config.packTypes[packType]?.rareBoost || 0;
-    const shiny = Math.random() < rarity.shinyChance + boost * 0.04;
+    const pack = config.packTypes[packType];
+    const shiny = Math.random() < formulas.shinyChance(rarity, pack);
     const card = { id: uid('card'), pokemonId: p.id, name: p.name, sprite: shiny ? shinySprite(p.id) : p.sprite, types: p.types, rarity, shiny, value: cardValue(p.stats, rarity, shiny) };
     return collection.tagCard(card);
   }
