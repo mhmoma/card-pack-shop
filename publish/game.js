@@ -153,7 +153,7 @@
     if (filterBtn) {
       state.collectionFilter = collection.normalizeFilter(state.collectionFilter || collection.defaultFilter());
       state.collectionFilter[filterBtn.dataset.filterType] = filterBtn.dataset.filterValue;
-      ui.renderAll(state);
+      ui.resetCollectionLimit(); ui.renderAll(state);
       save();
       return;
     }
@@ -168,6 +168,7 @@
   $('closeModal').addEventListener('click', () => $('modal').classList.add('hidden'));
   $('closeBuyPopup').addEventListener('click', () => $('buyPopup').classList.add('hidden'));
   $('closePackPopup').addEventListener('click', () => $('packPopup').classList.add('hidden'));
+  $('loadMoreCards').addEventListener('click', () => { ui.extendCollectionLimit(); ui.renderAll(state); });
   async function useSelectedPack(action) {
     if (!selectedOwnedPackId) return;
     $('packPopup').classList.add('hidden'); await action(selectedOwnedPackId);

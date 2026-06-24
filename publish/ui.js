@@ -4,6 +4,7 @@ window.CardShop.ui = (() => {
   const { config, collection } = window.CardShop;
   const $ = (id) => document.getElementById(id);
   let priceFns = null;
+  let collectionLimit = 48;
 
   function setup(fns) { priceFns = fns; }
 
@@ -37,11 +38,13 @@ window.CardShop.ui = (() => {
   function renderCards(state) {
     const filter = collection.normalizeFilter(state.collectionFilter || collection.defaultFilter());
     const shown = collection.filterCards(state.cards, filter);
-    $('collectionInfo').textContent = collection.stats(state.cards, shown, filter);
+    const page = shown.slice(0, collectionLimit);
+    $('collectionInfo').textContent = `${collection.stats(state.cards, shown, filter)} · 已显示 ${page.length}/${shown.length}`;
     $('collectionFilters').innerHTML = filterGroup('region', collection.regions, filter.region)
       + filterGroup('generation', collection.generations, filter.generation)
       + filterGroup('quality', collection.qualities, filter.quality);
-    $('cardsGrid').innerHTML = shown.length ? shown.map(cardHtml).join('') : '<div class="empty">当前分类暂无卡片，换个地区或品质看看。</div>';
+    $('cardsGrid').innerHTML = page.length ? page.map(cardHtml).join('') : '<div class="empty">当前分类暂无卡片，换个地区或品质看看。</div>';
+    $('loadMoreCards').classList.toggle('hidden', page.length >= shown.length);
   }
 
   function filterGroup(type, items, active) {
@@ -140,6 +143,8 @@ window.CardShop.ui = (() => {
     $('loadingScreen').classList.add('hidden');
     $('app').classList.remove('locked');
   }
+  function resetCollectionLimit() { collectionLimit = 48; }
+  function extendCollectionLimit() { collectionLimit += 48; }
 
-  return { setup, renderAll, renderRefreshText, cardHtml, showModal, switchTab, renderSlots, showCover, showLoading, enterGame };
+  return { setup, renderAll, renderRefreshText, cardHtml, showModal, switchTab, renderSlots, showCover, showLoading, enterGame, resetCollectionLimit, extendCollectionLimit };
 })();
