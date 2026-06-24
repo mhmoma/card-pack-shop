@@ -35,6 +35,7 @@ window.CardShop.collection = (() => {
     { key: 'common', name: '普通' },
   ];
   const rank = { legendary: 5, epic: 4, rare: 3, uncommon: 2, common: 1 };
+  const tagVersion = 'region-generation-v2';
   const legacy = { kanto: '1', johto: '2', hoenn: '3', sinnoh: '4', unova: '5', kalos: '6', alola: '7', galar: '8', paldea: '9', gen1: '1', gen2: '2', gen3: '3', gen4: '4', gen5: '5', gen6: '6', gen7: '7', gen8: '8', gen9: '9' };
 
   function defaultFilter() { return { region: 'all', generation: 'all', quality: 'all' }; }
@@ -47,9 +48,9 @@ window.CardShop.collection = (() => {
 
   function tagPokemonData() {
     const data = window.CardShop.pokemonData;
-    if (!data || data.tagged) return;
+    if (!data || data.tagVersion === tagVersion) return;
     data.sortedByTotal.forEach((pokemon) => {
-      const region = regionOf(pokemon.id);
+      const region = regionOf(Number(pokemon.id));
       pokemon.regionTag = region.key;
       pokemon.generationTag = region.key;
       if (data.byId[pokemon.id]) {
@@ -57,14 +58,24 @@ window.CardShop.collection = (() => {
         data.byId[pokemon.id].generationTag = region.key;
       }
     });
-    data.tagged = true;
+    data.tagVersion = tagVersion;
   }
+
+  function tagCard(card) {
+    const data = window.CardShop.pokemonData.byId[card.pokemonId];
+    const region = data?.regionTag || regionOf(Number(card.pokemonId)).key;
+    card.regionTag = region;
+    card.generationTag = region;
+    return card;
+  }
+
+  function tagCards(cards) { tagPokemonData(); cards.forEach(tagCard); return cards; }
 
   function match(card, rawFilter) {
     const filter = normalizeFilter(rawFilter);
-    const data = window.CardShop.pokemonData.byId[card.pokemonId];
-    if (filter.region !== 'all' && data?.regionTag !== filter.region) return false;
-    if (filter.generation !== 'all' && data?.generationTag !== filter.generation) return false;
+    tagCard(card);
+    if (filter.region !== 'all' && card.regionTag !== filter.region) return false;
+    if (filter.generation !== 'all' && card.generationTag !== filter.generation) return false;
     if (filter.quality === 'shiny') return card.shiny;
     if (filter.quality !== 'all' && card.rarity.key !== filter.quality) return false;
     return true;
@@ -80,7 +91,7 @@ window.CardShop.collection = (() => {
     });
   }
 
-  function filterCards(cards, filter) { tagPokemonData(); return sorted(cards.filter((card) => match(card, filter))); }
+  function filterCards(cards, filter) { return sorted(tagCards(cards).filter((card) => match(card, filter))); }
 
   function stats(allCards, shownCards, rawFilter) {
     const filter = normalizeFilter(rawFilter);
@@ -91,5 +102,5 @@ window.CardShop.collection = (() => {
     return active ? `当前 ${shown} · 总收藏 ${total} · 闪光 ${shiny} 张` : `已收藏 ${total} · 闪光 ${shiny} 张`;
   }
 
-  return { regions, generations, qualities, defaultFilter, normalizeFilter, filterCards, stats, tagPokemonData };
+  return { regions, generations, qualities, defaultFilter, normalizeFilter, filterCards, stats, tagPokemonData, tagCard, tagCards };
 })();

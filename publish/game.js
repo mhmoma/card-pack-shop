@@ -48,6 +48,7 @@
     if (!state.nextRefresh || Date.now() >= state.nextRefresh || state.shop.length < 12) makeShop();
     if (!state.marketMood) state.marketMood = pick(config.marketMoods);
     collection.tagPokemonData();
+    collection.tagCards(state.cards);
     state.collectionFilter = collection.normalizeFilter(state.collectionFilter || collection.defaultFilter());
     ui.setup({ pack: marketPackPrice, card: marketCardPrice });
     await normalizeOldCards();
@@ -103,7 +104,8 @@
     const rarity = rarityByTotal(p.stats);
     const boost = config.packTypes[packType]?.rareBoost || 0;
     const shiny = Math.random() < rarity.shinyChance + boost * 0.04;
-    return { id: uid('card'), pokemonId: p.id, name: p.name, sprite: shiny ? shinySprite(p.id) : p.sprite, types: p.types, rarity, shiny, value: cardValue(p.stats, rarity, shiny) };
+    const card = { id: uid('card'), pokemonId: p.id, name: p.name, sprite: shiny ? shinySprite(p.id) : p.sprite, types: p.types, rarity, shiny, value: cardValue(p.stats, rarity, shiny) };
+    return collection.tagCard(card);
   }
 
   async function normalizeOldCards() {
@@ -117,6 +119,7 @@
       card.types = p.types;
       card.rarity = rarity;
       card.value = cardValue(p.stats, rarity, card.shiny);
+      collection.tagCard(card);
     }
     if (changed) await save();
   }
