@@ -22,7 +22,7 @@
   function makeShop() {
     const types = Object.keys(config.packTypes);
     state.marketMood = pick(config.marketMoods);
-    state.shop = Array.from({ length: 8 }, (_, i) => {
+    state.shop = Array.from({ length: 12 }, (_, i) => {
       const type = Math.random() < 0.12 ? 'mystery' : pick(types);
       const base = config.packTypes[type];
       return { id: uid('slot'), type, price: money(base.price * (0.85 + Math.random() * 0.35)), sold: false, hot: i === 0 && Math.random() < 0.5 };
@@ -41,7 +41,7 @@
   async function load() {
     const saved = await storage.get(key);
     Object.assign(state, saved || { gold: config.initialGold });
-    if (!state.nextRefresh || Date.now() >= state.nextRefresh) makeShop();
+    if (!state.nextRefresh || Date.now() >= state.nextRefresh || state.shop.length < 12) makeShop();
     if (!state.marketMood) state.marketMood = pick(config.marketMoods);
     ui.setup({ pack: marketPackPrice, card: marketCardPrice });
     ui.renderAll(state);
