@@ -2,28 +2,82 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>My Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content, user-scalable=no">
+  <title>卡包商店</title>
   <link rel="stylesheet" href="style.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <script src="app.js"></script>
 </head>
 <body>
-  <div class="container" x-data="app">
-    <div class="card" x-show="!ready">
-      <p>SDK 加载中...</p>
-    </div>
-
-    <div class="card" x-show="ready" x-transition>
-      <div class="header" x-show="userName">
-        <template x-if="userAvatar">
-          <img :src="userAvatar" class="avatar" />
-        </template>
-        <span x-text="userName"></span>
+  <div id="app" class="game-shell">
+    <header class="top-bar">
+      <div>
+        <h1>卡包商店</h1>
+        <p>购买卡包，收集来自 PokeAPI 的宝可梦卡片</p>
       </div>
-      <h1>Hello World</h1>
-      <p class="hint">编辑 app.js 开始创作</p>
+      <div class="wallet">
+        <strong id="gold">0</strong>
+        <span>金币</span>
+      </div>
+    </header>
+
+    <main class="content">
+      <section id="shopView" class="panel shop-panel">
+        <div class="shop-head">
+          <div>
+            <h2>今日货架</h2>
+            <p id="refreshText">刷新中...</p>
+          </div>
+          <button id="refreshBtn" class="small-btn">花 80 刷新</button>
+        </div>
+        <div class="shelf-wrap">
+          <div id="shopGrid" class="shelf-grid"></div>
+        </div>
+      </section>
+
+      <section id="packsView" class="panel hidden">
+        <div class="section-head">
+          <h2>未开卡包</h2>
+          <p>打开卡包获得随机宝可梦卡片，也可卖给市场。</p>
+        </div>
+        <div id="packsList" class="list-grid"></div>
+      </section>
+
+      <section id="collectionView" class="panel hidden">
+        <div class="section-head">
+          <h2>收藏图鉴</h2>
+          <p id="collectionInfo">暂无卡片</p>
+        </div>
+        <div id="cardsGrid" class="cards-grid"></div>
+      </section>
+
+      <section id="marketView" class="panel hidden">
+        <div class="section-head">
+          <h2>模拟市场</h2>
+          <p id="marketText">市场行情会随商店刷新波动。</p>
+        </div>
+        <div id="marketList" class="list-grid"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button data-tab="shop" class="active">商店</button>
+      <button data-tab="packs">卡包</button>
+      <button data-tab="collection">收藏</button>
+      <button data-tab="market">市场</button>
+    </nav>
+
+    <div id="modal" class="modal hidden">
+      <div class="modal-card">
+        <button id="closeModal" class="close-btn">×</button>
+        <h2 id="modalTitle">开包结果</h2>
+        <div id="modalBody" class="cards-grid compact"></div>
+      </div>
     </div>
   </div>
+
+  <script src="storage.js"></script>
+  <script src="config.js"></script>
+  <script src="poke-api.js"></script>
+  <script src="ui.js"></script>
+  <script src="game.js"></script>
 </body>
 </html>

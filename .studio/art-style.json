@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "name": "fantasy card shop",
+  "description": "Warm fantasy MMORPG card shop UI with polished wood shelves, gold trims, jewel accents, and collectible card pack presentation.",
+  "palette": ["#2b1b33", "#7b4a23", "#d9a441", "#67d7ff", "#f6efe0"],
+  "view": "front-facing shop interface",
+  "outline": "clean illustrated UI edges",
+  "lighting": "warm magical indoor lighting",
+  "avoid": ["text", "logo", "watermark", "copyrighted characters", "pokemon names", "real brands"]
+}

@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "createdAt": "2026-06-24T07:17:08Z",
+  "updatedAt": "2026-06-24T07:24:03Z",
+  "assets": [
+    {
+      "name": "shop-background",
+      "status": "success",
+      "path": "publish/assets/generated/shop-background.7289aaf8.webp",
+      "contentHash": "7289aaf8",
+      "revisedPrompt": "Warm fantasy MMORPG collectible card shop interior, front-facing game background, polished wooden shelves with golden trims, soft magical lantern light, cozy trading card store atmosphere, empty central display area for UI overlays, jewel accents, detailed but not busy, wide composition, no readable signs, no text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1536x1024",
+      "wantsTransparent": false,
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q80_opaque",
+      "originalBytes": 2508454,
+      "finalBytes": 174376,
+      "usage": {
+        "inputTokens": 69,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqrqoi18_xqvf8p4t",
+      "createdAt": "2026-06-24T07:17:08Z"
+    },
+    {
+      "name": "shelf-frame",
+      "status": "success",
+      "path": "publish/assets/generated/shelf-frame.f5d57463.webp",
+      "contentHash": "f5d57463",
+      "revisedPrompt": "Fantasy game UI wooden display shelf frame for collectible card packs, front view, polished dark wood, gold metal corners, empty transparent center, symmetrical MMORPG inventory style, clean illustrated edges, premium trading shop prop, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the object. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1536x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 63,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1686500,
+      "finalBytes": 113462,
+      "usage": {
+        "inputTokens": 153,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqrqra0s_d59imnqx",
+      "createdAt": "2026-06-24T07:18:51Z"
+    },
+    {
+      "name": "pack-common",
+      "status": "success",
+      "path": "publish/assets/generated/pack-common.6c28cdde.webp",
+      "contentHash": "6c28cdde",
+      "revisedPrompt": "Collectible monster card booster pack icon, generic fantasy trading card game pack, blue and silver wrapper, gold seal, shiny foil, front-facing 3/4 game item sprite, no creatures, no readable text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the object. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 72.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1846298,
+      "finalBytes": 136172,
+      "usage": {
+        "inputTokens": 152,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqrqtcg0_f8o7kne3",
+      "createdAt": "2026-06-24T07:20:37Z"
+    },
+    {
+      "name": "pack-premium",
+      "status": "success",
+      "path": "publish/assets/generated/pack-premium.3641f824.webp",
+      "contentHash": "3641f824",
+      "revisedPrompt": "Premium collectible monster card booster pack icon, generic fantasy trading card game pack, purple black and gold wrapper, jewel clasp, rare glowing foil, front-facing 3/4 game item sprite, no creatures, no readable text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the object. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 63.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1922294,
+      "finalBytes": 172792,
+      "usage": {
+        "inputTokens": 154,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqrqvoi0_r1m2637x",
+      "createdAt": "2026-06-24T07:22:32Z"
+    },
+    {
+      "name": "pack-mystery",
+      "status": "success",
+      "path": "publish/assets/generated/pack-mystery.79d21089.webp",
+      "contentHash": "79d21089",
+      "revisedPrompt": "Mystery collectible monster card booster pack icon, generic fantasy trading card game pack, rainbow dark holographic wrapper, magical question mark shaped glow without readable text, star sparkle foil, front-facing 3/4 game item sprite, no creatures, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the object. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 66.2,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1719704,
+      "finalBytes": 139568,
+      "usage": {
+        "inputTokens": 157,
+        "outputImageTokens": 515
+      },
+      "traceId": "trace_mqrqya2k_jht2ip7w",
+      "createdAt": "2026-06-24T07:24:03Z"
+    }
+  ]
+}
